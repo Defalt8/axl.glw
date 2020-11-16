@@ -12,3 +12,4 @@ A well organized C++ OpenGL wrangler library
 - [axl.glw/gl2.hpp](/include/axl.glw/gl2.hpp) - Declares all *OpenGL 2.+* constants and functions that require loading.
 - [axl.glw/gl3.hpp](/include/axl.glw/gl3.hpp) - Declares all *OpenGL 3.+* constants and functions that require loading.
 - [axl.glw/gl4.hpp](/include/axl.glw/gl4.hpp) - Declares all *OpenGL 4.+* constants and functions that require loading.
+- [axl.glw/wglext.hpp](/include/axl.glw/wglext.hpp) - Declares Windows specific *WGL extension* constants and functions that require loading.

@@ -73,6 +73,7 @@ install( FILES
 	"include/axl.glw/gl2.hpp"
 	"include/axl.glw/gl3.hpp"
 	"include/axl.glw/gl4.hpp"
+	"include/axl.glw/wglext.hpp"
 	DESTINATION "${CMAKE_INSTALL_INCDIR}/axl.glw"
 )
 install( TARGETS
