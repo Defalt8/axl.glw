@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
+#if PLATFORM==PLATFORM_WINDOWS
+#include "platform/win32/glProc.inl"
+#endif
 #include <axl.glw/platform.hpp>
 #include <axl.glw/glw.hpp>
 #include <axl.glw/gl.hpp>
@@ -10,7 +13,6 @@
 #include <axl.glw/gl4.hpp>
 #include <axl.glw/Dummy.hpp>
 #if PLATFORM==PLATFORM_WINDOWS
-#include "platform/win32/glProc.inl"
 
 namespace axl {
 namespace glw {

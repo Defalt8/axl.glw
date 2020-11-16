@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "Assert.hpp"
+#include "lib.hpp"
 #include <axl.glw/wglext.hpp>
 
 void testFunctions(bool verbose);
@@ -12,8 +13,8 @@ int main(int argc, char *argv[])
 	using namespace axl;
 	using namespace axl::glw;
 	using namespace axl::glw::wglext;
-	printf("axl.glw - version %u.%u.%u\n", lib::version.major, lib::version.minor, lib::version.patch);
-	puts("----------------------------------------");
+	printf("axl.glw - version %u.%u.%u  %s %s\n", lib::version.major, lib::version.minor, lib::version.patch, LIB_TYPE, DEBUG_REL);
+	if(verbose) puts("----------------------------------------");
 	atexit(wglext::cleanup);
 	IError error;
 	Assertv((error = wglext::init(false)) == IERR_NO_CONTEXT, verbose);

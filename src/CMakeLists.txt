@@ -8,13 +8,19 @@ add_library( axl.glw ${LIB_TYPE}
 	"platext.cpp"
 )
 # Target link libraries
-target_link_libraries( axl.glw -lgdi32 -lopengl32 )
-# Target compile definitions
-if( "${LIB_TYPE}" STREQUAL "SHARED" )
-	target_compile_definitions( axl.glw PRIVATE BUILD_SHARED )
-elseif( "${LIB_TYPE}" STREQUAL "MODULE" )
-	target_compile_definitions( axl.glw PRIVATE BUILD_MODULE )
+if( ${MSVC} )
+	set( LIBGDI32 gdi32.lib )
+	set( LIBOPENGL32 opengl32.lib )
+elseif( ${WIN32} )
+	set( LIBGDI32 -lgdi32 )
+	set( LIBOPENGL32 -lopengl32 )
+else()
+	set( LIBOPENGL32 -lopengl32 )
 endif()
+target_link_libraries( axl.glw ${LIBGDI32} ${LIBOPENGL32} )
+# Target compile definitions
+target_compile_definitions( axl.glw PUBLIC "${AXLGLW_LIB_TYPE}" )
+target_compile_definitions( axl.glw PRIVATE "AXLGLW_BUILD" )
 # Target properties
 set_target_properties( axl.glw PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/tests"

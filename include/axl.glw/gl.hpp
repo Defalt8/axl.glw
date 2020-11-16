@@ -2,19 +2,16 @@
 #include <stddef.h>
 #include "lib.hpp"
 
-/* __WIN32__ */
 #if !defined(__WIN32__) && (defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__))
 #  define __WIN32__
 #endif
 
-/* GLAPI, part 1 (use WINGDIAPI, if defined) */
 #if defined(__WIN32__) && defined(WINGDIAPI)
 #  define GLAPI WINGDIAPI
 #endif
 
-/* GLAPI, part 2 */
-#if !defined(GLAPI)
-#  if defined(_MSC_VER)
+#ifndef GLAPI
+#  ifdef _MSC_VER
 #    define GLAPI __declspec(dllimport)
 #  elif defined(__LCC__) && defined(__WIN32__)
 #    define GLAPI __stdcall
@@ -23,9 +20,8 @@
 #  endif
 #endif
 
-/* APIENTRY */
-#if !defined(APIENTRY)
-#  if defined(__WIN32__)
+#ifndef APIENTRY
+#  ifdef __WIN32__
 #    define APIENTRY __stdcall
 #  else
 #    define APIENTRY

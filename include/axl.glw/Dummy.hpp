@@ -4,7 +4,7 @@
 namespace axl {
 namespace glw {
 
-class Dummy {
+class AXLGLWCXXAPI Dummy {
 	public:
 		enum InitError {
 			IERR_UNKNOWN = -1,

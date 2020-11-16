@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "Assert.hpp"
-#include <axl.glw/lib.hpp>
+#include "lib.hpp"
 #include <axl.glw/glw.hpp>
 #include <axl.glw/gl.hpp>
 #include <axl.glw/glext.hpp>
@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
 	using namespace axl::glw::gl2;
 	using namespace axl::glw::gl3;
 	using namespace axl::glw::gl4;
-	printf("axl.glw - version %u.%u.%u\n", lib::version.major, lib::version.minor, lib::version.patch);
-	puts("----------------------------------------");
+	printf("axl.glw - version %u.%u.%u  %s %s\n", lib::version.major, lib::version.minor, lib::version.patch, LIB_TYPE, DEBUG_REL);
+	if(verbose) puts("----------------------------------------");
 	atexit(axl::glw::cleanup);
 	{
 		InitError error;

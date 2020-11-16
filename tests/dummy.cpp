@@ -1,17 +1,17 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include "Assert.hpp"
-#include <axl.glw/lib.hpp>
 #include <axl.glw/Dummy.hpp>
+#include "Assert.hpp"
+#include "lib.hpp"
 
 int main(int argc, char *argv[])
 {
 	bool verbose = argc > 1 && (0 == strcmp(argv[1], "-v") || 0 == strcmp(argv[1], "--verbose"));
 	using namespace axl;
 	using namespace axl::glw;
-	printf("axl.glw - version %u.%u.%u\n", lib::version.major, lib::version.minor, lib::version.patch);
-	puts("----------------------------------------");
+	printf("axl.glw - version %u.%u.%u  %s %s\n", lib::version.major, lib::version.minor, lib::version.patch, LIB_TYPE, DEBUG_REL);
+	if(verbose) puts("----------------------------------------");
 	{
 		Assertve(GlobalDummy.isInitialized(), verbose);
 		Assertve(GlobalDummy.makeCurrent(), verbose);

@@ -1,8 +1,8 @@
 
-#include <malloc.h>
+#include <cstdlib>
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <axl.glw/dummy.hpp>
+#include <axl.glw/Dummy.hpp>
 
 namespace axl {
 namespace glw {
@@ -12,6 +12,7 @@ typedef struct {
 	HDC hdc;	
 	HGLRC context;
 } DummyData;
+
 Dummy::Dummy(bool init)
 {
 	reserved = (void*)calloc(1, sizeof(DummyData));
@@ -25,7 +26,7 @@ Dummy::~Dummy()
 }
 Dummy::InitError Dummy::init()
 {
-	const static char* DUMMY_CLASSNAME = "ALX_GLW_DUMMY_WINDOW_CLASS";
+	const static char* DUMMY_CLASSNAME = "ALXGLW_DUMMY_WINDOW_CLASS";
 	if(!this->reserved) this->reserved = (void*)calloc(1, sizeof(DummyData));
 	DummyData* data = ((DummyData*)this->reserved);
 	BOOL init = FALSE;

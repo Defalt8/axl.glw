@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <axl.glw/platform.hpp>
+#include "lib.hpp"
 
 int main()
 {
@@ -31,6 +32,8 @@ int main()
 		case ABI_UNKNOWN:
 		default: CSTR_ABI = "Unknown";
 	}
+	printf("axl.glw - version %u.%u.%u  %s %s\n", lib::version.major, lib::version.minor, lib::version.patch, LIB_TYPE, DEBUG_REL);
+	puts("----------------------------------------");
 	printf("Platform: %s\n", CSTR_PLATFORM);
 	printf("ABI: %s\n", CSTR_ABI);
 	return 0;
