@@ -66,6 +66,13 @@ install( FILES
 	"include/axl.glw/lib.hpp"
 	"include/axl.glw/platform.hpp"
 	"include/axl.glw/Dummy.hpp"
+	"include/axl.glw/glw.hpp"
+	"include/axl.glw/gl.hpp"
+	"include/axl.glw/glext.hpp"
+	"include/axl.glw/gl1.hpp"
+	"include/axl.glw/gl2.hpp"
+	"include/axl.glw/gl3.hpp"
+	"include/axl.glw/gl4.hpp"
 	DESTINATION "${CMAKE_INSTALL_INCDIR}/axl.glw"
 )
 install( TARGETS

@@ -4,7 +4,7 @@ namespace axl {
 namespace glw {
 namespace lib {
 
-Version version = { .major = 0, .minor = 3, .patch = 0 };
+Version version = { .major = 0, .minor = 4, .patch = 0 };
 
 } // namespace axl.glw.lib	
 } // namespace axl.glw	

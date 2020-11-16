@@ -4,6 +4,7 @@ cmake_minimum_required( VERSION 3.17 )
 add_library( axl.glw ${LIB_TYPE}
 	"lib.cpp"
 	"Dummy.cpp"
+	"glw.cpp"
 )
 # Target link libraries
 target_link_libraries( axl.glw -lgdi32 -lopengl32 )
