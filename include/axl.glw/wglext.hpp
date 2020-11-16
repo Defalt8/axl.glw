@@ -10,8 +10,8 @@
 
 namespace axl {
 namespace glw {
-using namespace gl;
 namespace wglext {
+using namespace axl::glw::gl;
 
 constexpr GLulong WGL_WGLEXT_VERSION = 20200408;
 
@@ -39,8 +39,8 @@ AXLGLWAPI bool _ARB_context_flush_control;
 // WGL_ARB_create_context
 constexpr long WGL_CONTEXT_DEBUG_BIT_ARB = 0x00000001;
 constexpr long WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB = 0x00000002;
-constexpr long WGL_CONTEXT_GL_MAJOR_VERSION_ARB = 0x2091;
-constexpr long WGL_CONTEXT_GL_MINOR_VERSION_ARB = 0x2092;
+constexpr long WGL_CONTEXT_MAJOR_VERSION_ARB = 0x2091;
+constexpr long WGL_CONTEXT_MINOR_VERSION_ARB = 0x2092;
 constexpr long WGL_CONTEXT_LAYER_PLANE_ARB = 0x2093;
 constexpr long WGL_CONTEXT_FLAGS_ARB = 0x2094;
 constexpr long ERROR_INVALID_VERSION_ARB = 0x2095;

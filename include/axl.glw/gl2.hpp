@@ -4,9 +4,9 @@
 
 namespace axl {
 namespace glw {
-using namespace gl;
-using namespace glext;
 namespace gl2 {
+using namespace axl::glw::gl;
+using namespace axl::glw::glext;
 
 // GL_VERSION_2_0
 constexpr GLenum GL_BLEND_EQUATION_RGB = GL_BLEND_EQUATION;

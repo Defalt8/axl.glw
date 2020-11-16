@@ -3,8 +3,8 @@
 
 namespace axl {
 namespace glw {
-using namespace gl;
 namespace gl4 {
+using namespace axl::glw::gl;
 
 // GL_VERSION_4_0
 constexpr GLenum GL_SAMPLE_SHADING = 0x8C36;

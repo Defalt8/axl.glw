@@ -5,7 +5,7 @@
 namespace axl {
 namespace glw {
 namespace gl1 {
-using namespace gl;
+using namespace axl::glw::gl;
 
 // GL_VERSION_1_2
 constexpr GLenum GL_SMOOTH_POINT_SIZE_RANGE = 0x0B12;

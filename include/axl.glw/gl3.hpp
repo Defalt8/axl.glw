@@ -5,10 +5,10 @@
 
 namespace axl {
 namespace glw {
-using namespace gl;
-using namespace gl2;
-using namespace glext;
 namespace gl3 {
+using namespace axl::glw::gl;
+using namespace axl::glw::gl2;
+using namespace axl::glw::glext;
 
 // GL_VERSION_3_0
 constexpr GLenum GL_CLIP_DISTANCE0 = GL_CLIP_PLANE0;

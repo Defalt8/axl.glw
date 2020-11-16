@@ -4,8 +4,8 @@
 
 namespace axl {
 namespace glw {
-using namespace gl;
 namespace glext {
+using namespace axl::glw::gl;
 
 // GL_ARB_arrays_of_arrays
 AXLGLWAPI bool arb_arrays_of_arrays;
