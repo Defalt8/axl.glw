@@ -65,6 +65,7 @@ endif()
 install( FILES
 	"include/axl.glw/lib.hpp"
 	"include/axl.glw/platform.hpp"
+	"include/axl.glw/Dummy.hpp"
 	DESTINATION "${CMAKE_INSTALL_INCDIR}/axl.glw"
 )
 install( TARGETS

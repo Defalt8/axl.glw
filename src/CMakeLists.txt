@@ -3,7 +3,10 @@ cmake_minimum_required( VERSION 3.17 )
 # Library
 add_library( axl.glw ${LIB_TYPE}
 	"lib.cpp"
+	"Dummy.cpp"
 )
+# Target link libraries
+target_link_libraries( axl.glw -lgdi32 -lopengl32 )
 # Target compile definitions
 if( "${LIB_TYPE}" STREQUAL "SHARED" )
 	target_compile_definitions( axl.glw PRIVATE BUILD_SHARED )
