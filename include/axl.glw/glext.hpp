@@ -8,7 +8,7 @@ namespace glext {
 using namespace axl::glw::gl;
 
 // GL_ARB_arrays_of_arrays
-AXLGLWAPI bool arb_arrays_of_arrays;
+AXLGLWAPI bool GL_ARB_arrays_of_arrays;
 
 // GL_ARB_base_instance
 typedef void (APIENTRY * PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC) (GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance);
@@ -17,7 +17,7 @@ typedef void (APIENTRY * PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC) (
 AXLGLWAPI PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC glDrawArraysInstancedBaseInstance;
 AXLGLWAPI PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC glDrawElementsInstancedBaseInstance;
 AXLGLWAPI PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC glDrawElementsInstancedBaseVertexBaseInstance;
-AXLGLWAPI bool arb_base_instance;
+AXLGLWAPI bool GL_ARB_base_instance;
 
 // GL_ARB_blend_func_extended
 constexpr GLenum GL_SRC1_COLOR = 0x88F9;
@@ -28,7 +28,7 @@ typedef void (APIENTRY * PFNGLBINDFRAGDATALOCATIONINDEXEDPROC) (GLuint program, 
 typedef GLint (APIENTRY * PFNGLGETFRAGDATAINDEXPROC) (GLuint program, const GLubyte * name);
 AXLGLWAPI PFNGLBINDFRAGDATALOCATIONINDEXEDPROC glBindFragDataLocationIndexed;
 AXLGLWAPI PFNGLGETFRAGDATAINDEXPROC glGetFragDataIndex;
-AXLGLWAPI bool arb_blend_func_extended;
+AXLGLWAPI bool GL_ARB_blend_func_extended;
 
 // GL_ARB_buffer_storage
 constexpr GLenum GL_MAP_READ_BIT = 0x0001;
@@ -42,7 +42,7 @@ constexpr GLenum GL_BUFFER_IMMUTABLE_STORAGE = 0x821F;
 constexpr GLenum GL_BUFFER_STORAGE_FLAGS = 0x8220;
 typedef void (APIENTRY * PFNGLBUFFERSTORAGEPROC) (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags);
 AXLGLWAPI PFNGLBUFFERSTORAGEPROC glBufferStorage;
-AXLGLWAPI bool arb_buffer_storage;
+AXLGLWAPI bool GL_ARB_buffer_storage;
 
 // GL_ARB_clear_buffer_object
 typedef void (APIENTRY * PFNGLCLEARBUFFERDATAPROC) (GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data);
@@ -53,7 +53,7 @@ AXLGLWAPI PFNGLCLEARBUFFERDATAPROC glClearBufferData;
 AXLGLWAPI PFNGLCLEARBUFFERSUBDATAPROC glClearBufferSubData;
 AXLGLWAPI PFNGLCLEARNAMEDBUFFERDATAEXTPROC glClearNamedBufferDataEXT;
 AXLGLWAPI PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC glClearNamedBufferSubDataEXT;
-AXLGLWAPI bool arb_clear_buffer_object;
+AXLGLWAPI bool GL_ARB_clear_buffer_object;
 
 // GL_ARB_ES2_compatibility
 constexpr GLenum GL_FIXED = 0x140C;
@@ -83,7 +83,7 @@ AXLGLWAPI PFNGLDEPTHRANGEFPROC glDepthRangef;
 AXLGLWAPI PFNGLGETSHADERPRECISIONFORMATPROC glGetShaderPrecisionFormat;
 AXLGLWAPI PFNGLRELEASESHADERCOMPILERPROC glReleaseShaderCompiler;
 AXLGLWAPI PFNGLSHADERBINARYPROC glShaderBinary;
-AXLGLWAPI bool arb_ES2_compatibility;
+AXLGLWAPI bool GL_ARB_ES2_compatibility;
 
 // GL_ARB_ES3_compatibility
 constexpr GLenum GL_TEXTURE_IMMUTABLE_LEVELS = 0x82DF;
@@ -100,12 +100,12 @@ constexpr GLenum GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 = 0x9276;
 constexpr GLenum GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 = 0x9277;
 constexpr GLenum GL_COMPRESSED_RGBA8_ETC2_EAC = 0x9278;
 constexpr GLenum GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC = 0x9279;
-AXLGLWAPI bool arb_ES3_compatibility;
+AXLGLWAPI bool GL_ARB_ES3_compatibility;
 
 // GL_ARB_ES3_1_compatibility
 typedef void (APIENTRY * PFNGLMEMORYBARRIERBYREGIONPROC) (GLbitfield barriers);
 AXLGLWAPI PFNGLMEMORYBARRIERBYREGIONPROC glMemoryBarrierByRegion;
-AXLGLWAPI bool arb_ES3_1_compatibility;
+AXLGLWAPI bool GL_ARB_ES3_1_compatibility;
 
 // GL_ARB_ES3_2_compatibility
 constexpr GLenum GL_PRIMITIVE_BOUNDING_BOX_ARB = 0x92BE;
@@ -113,7 +113,7 @@ constexpr GLenum GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB = 0x9381;
 constexpr GLenum GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB = 0x9382;
 typedef void (APIENTRY * PFNGLPRIMITIVEBOUNDINGBOXARBPROC) (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW);
 AXLGLWAPI PFNGLPRIMITIVEBOUNDINGBOXARBPROC glPrimitiveBoundingBoxARB;
-AXLGLWAPI bool arb_ES3_2_compatibility;
+AXLGLWAPI bool GL_ARB_ES3_2_compatibility;
 
 // GL_ARB_imaging
 constexpr GLenum GL_CONSTANT_COLOR = 0x8001;
@@ -259,13 +259,13 @@ AXLGLWAPI PFNGLMINMAXPROC glMinmax;
 AXLGLWAPI PFNGLRESETHISTOGRAMPROC glResetHistogram;
 AXLGLWAPI PFNGLRESETMINMAXPROC glResetMinmax;
 AXLGLWAPI PFNGLSEPARABLEFILTER2DPROC glSeparableFilter2D;
-AXLGLWAPI bool arb_imaging;
+AXLGLWAPI bool GL_ARB_imaging;
 
 // GL_ARB_shadow
 constexpr GLenum GL_TEXTURE_COMPARE_MODE_ARB = 0x884C;
 constexpr GLenum GL_TEXTURE_COMPARE_FUNC_ARB = 0x884D;
 constexpr GLenum GL_COMPARE_R_TO_TEXTURE_ARB = 0x884E;
-AXLGLWAPI bool arb_shadow;
+AXLGLWAPI bool GL_ARB_shadow;
 
 // GL_ARB_sync
 constexpr GLenum GL_SYNC_FLUSH_COMMANDS_BIT = 0x00000001;
@@ -297,7 +297,7 @@ AXLGLWAPI PFNGLGETINTEGER64VPROC glGetInteger64v;
 AXLGLWAPI PFNGLGETSYNCIVPROC glGetSynciv;
 AXLGLWAPI PFNGLISSYNCPROC glIsSync;
 AXLGLWAPI PFNGLWAITSYNCPROC glWaitSync;
-AXLGLWAPI bool arb_sync;
+AXLGLWAPI bool GL_ARB_sync;
 
 // GL_ARB_tessellation_shader
 constexpr GLenum GL_PATCHES = 0xE;
@@ -336,7 +336,7 @@ typedef void (APIENTRY * PFNGLPATCHPARAMETERFVPROC) (GLenum pname, const GLfloat
 typedef void (APIENTRY * PFNGLPATCHPARAMETERIPROC) (GLenum pname, GLint value);
 AXLGLWAPI PFNGLPATCHPARAMETERFVPROC glPatchParameterfv;
 AXLGLWAPI PFNGLPATCHPARAMETERIPROC glPatchParameteri;
-AXLGLWAPI bool arb_tessellation_shader;
+AXLGLWAPI bool GL_ARB_tessellation_shader;
 
 } // namespace axl.glw.glext
 } // namespace axl.glw

@@ -1,3 +1,4 @@
+#include <cstring>
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <axl.glw/dummy.hpp>
@@ -14,52 +15,52 @@ PFNWGLCREATEBUFFERREGIONARBPROC wglCreateBufferRegionARB = (PFNWGLCREATEBUFFERRE
 PFNWGLDELETEBUFFERREGIONARBPROC wglDeleteBufferRegionARB = (PFNWGLDELETEBUFFERREGIONARBPROC)0;
 PFNWGLSAVEBUFFERREGIONARBPROC wglSaveBufferRegionARB = (PFNWGLSAVEBUFFERREGIONARBPROC)0;
 PFNWGLRESTOREBUFFERREGIONARBPROC wglRestoreBufferRegionARB = (PFNWGLRESTOREBUFFERREGIONARBPROC)0;
-bool _ARB_buffer_region = 0;
+bool WGL_ARB_buffer_region = 0;
 // WGL_ARB_context_flush_control
-bool _ARB_context_flush_control = 0;
+bool WGL_ARB_context_flush_control = 0;
 // WGL_ARB_create_context
 PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)0;
-bool _ARB_create_context = 0;
+bool WGL_ARB_create_context = 0;
 // WGL_ARB_create_context_no_error
-bool _ARB_create_context_no_error = 0;
+bool WGL_ARB_create_context_no_error = 0;
 // WGL_ARB_create_context_profile
-bool _ARB_create_context_profile = 0;
+bool WGL_ARB_create_context_profile = 0;
 // WGL_ARB_create_context_robustness
-bool _ARB_create_context_robustness = 0;
+bool WGL_ARB_create_context_robustness = 0;
 // WGL_ARB_extensions_string
 PFNWGLGETEXTENSIONSSTRINGARBPROC wglGetExtensionsStringARB = (PFNWGLGETEXTENSIONSSTRINGARBPROC)0;
-bool _ARB_extensions_string = 0;
+bool WGL_ARB_extensions_string = 0;
 // WGL_ARB_framebuffer_sRGB
-bool _ARB_framebuffer_sRGB = 0;
+bool WGL_ARB_framebuffer_sRGB = 0;
 // WGL_ARB_make_current_read
 PFNWGLMAKECONTEXTCURRENTARBPROC wglMakeContextCurrentARB = (PFNWGLMAKECONTEXTCURRENTARBPROC)0;
 PFNWGLGETCURRENTREADDCARBPROC wglGetCurrentReadDCARB = (PFNWGLGETCURRENTREADDCARBPROC)0;
-bool _ARB_make_current_read = 0;
+bool WGL_ARB_make_current_read = 0;
 // WGL_ARB_multisample
-bool _ARB_multisample = 0;
+bool WGL_ARB_multisample = 0;
 // WGL_ARB_pbuffer
 PFNWGLCREATEPBUFFERARBPROC wglCreatePbufferARB = (PFNWGLCREATEPBUFFERARBPROC)0;
 PFNWGLGETPBUFFERDCARBPROC wglGetPbufferDCARB = (PFNWGLGETPBUFFERDCARBPROC)0;
 PFNWGLRELEASEPBUFFERDCARBPROC wglReleasePbufferDCARB = (PFNWGLRELEASEPBUFFERDCARBPROC)0;
 PFNWGLDESTROYPBUFFERARBPROC wglDestroyPbufferARB = (PFNWGLDESTROYPBUFFERARBPROC)0;
 PFNWGLQUERYPBUFFERARBPROC wglQueryPbufferARB = (PFNWGLQUERYPBUFFERARBPROC)0;
-bool _ARB_pbuffer = 0;
+bool WGL_ARB_pbuffer = 0;
 // WGL_ARB_pixel_format
 PFNWGLGETPIXELFORMATATTRIBIVARBPROC wglGetPixelFormatAttribivARB = (PFNWGLGETPIXELFORMATATTRIBIVARBPROC)0;
 PFNWGLGETPIXELFORMATATTRIBFVARBPROC wglGetPixelFormatAttribfvARB = (PFNWGLGETPIXELFORMATATTRIBFVARBPROC)0;
 PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)0;
-bool _ARB_pixel_format = 0;
+bool WGL_ARB_pixel_format = 0;
 // WGL_ARB_pixel_format_float
-bool _ARB_pixel_format_float = 0;
+bool WGL_ARB_pixel_format_float = 0;
 // WGL_ARB_render_texture
 PFNWGLBINDTEXIMAGEARBPROC wglBindTexImageARB = (PFNWGLBINDTEXIMAGEARBPROC)0;
 PFNWGLRELEASETEXIMAGEARBPROC wglReleaseTexImageARB = (PFNWGLRELEASETEXIMAGEARBPROC)0;
 PFNWGLSETPBUFFERATTRIBARBPROC wglSetPbufferAttribARB = (PFNWGLSETPBUFFERATTRIBARBPROC)0;
-bool _ARB_render_texture = 0;
+bool WGL_ARB_render_texture = 0;
 // WGL_ARB_robustness_application_isolation
-bool _ARB_robustness_application_isolation = 0;
+bool WGL_ARB_robustness_application_isolation = 0;
 // WGL_ARB_robustness_share_group_isolation
-bool _ARB_robustness_share_group_isolation = 0;
+bool WGL_ARB_robustness_share_group_isolation = 0;
 // WGL_3DFX_multisample
 bool _3DFX_multisample = 0;
 // WGL_3DL_stereo_control
@@ -250,118 +251,118 @@ IError init(bool use_dummy)
 	if(use_dummy && (glw::Dummy::IERR_NONE != GlobalDummy.init() || false == GlobalDummy.makeCurrent())) return IERR_DUMMY;
 	if(!wglGetCurrentContext()) return IERR_NO_CONTEXT;
 	// WGL_ARB_extensions_string
-	if(wglGetExtensionsStringARB)
+	if(!wglGetExtensionsStringARB)
 	{
 		wglGetExtensionsStringARB = (PFNWGLGETEXTENSIONSSTRINGARBPROC)wglGetProcAddress("wglGetExtensionsStringARB");
-		if(wglGetExtensionsStringARB) _ARB_extensions_string = true;
+		if(wglGetExtensionsStringARB) WGL_ARB_extensions_string = true;
 	}
 	// WGL_ARB_buffer_region
-	if(_ARB_buffer_region && false != checkExtension("WGL_ARB_buffer_region"))
+	if(!WGL_ARB_buffer_region && false != wglext::checkExtension("WGL_ARB_buffer_region"))
 	{
 		wglCreateBufferRegionARB = (PFNWGLCREATEBUFFERREGIONARBPROC)wglGetProcAddress("wglCreateBufferRegionARB");
 		wglDeleteBufferRegionARB = (PFNWGLDELETEBUFFERREGIONARBPROC)wglGetProcAddress("wglDeleteBufferRegionARB");
 		wglSaveBufferRegionARB = (PFNWGLSAVEBUFFERREGIONARBPROC)wglGetProcAddress("wglSaveBufferRegionARB");
 		wglRestoreBufferRegionARB = (PFNWGLRESTOREBUFFERREGIONARBPROC)wglGetProcAddress("wglRestoreBufferRegionARB");
-		if(wglCreateBufferRegionARB) _ARB_buffer_region = true;
+		if(wglCreateBufferRegionARB) WGL_ARB_buffer_region = true;
 	}
 	// WGL_ARB_context_flush_control
-	if(_ARB_context_flush_control && false != checkExtension("WGL_ARB_context_flush_control"))
+	if(!WGL_ARB_context_flush_control && false != wglext::checkExtension("WGL_ARB_context_flush_control"))
 	{
-		_ARB_context_flush_control = true;
+		WGL_ARB_context_flush_control = true;
 	}
 	// WGL_ARB_create_context
-	if(_ARB_create_context && false != checkExtension("wglCreateContextAttribsARB"))
+	if(!WGL_ARB_create_context && false != wglext::checkExtension("WGL_ARB_create_context"))
 	{
 		wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
-		if(wglCreateContextAttribsARB) _ARB_create_context = true;
+		if(wglCreateContextAttribsARB) WGL_ARB_create_context = true;
 	}
 	// WGL_ARB_create_context_no_error
-	if(_ARB_create_context_no_error && false != checkExtension("WGL_ARB_create_context_no_error"))
+	if(!WGL_ARB_create_context_no_error && false != wglext::checkExtension("WGL_ARB_create_context_no_error"))
 	{
-		_ARB_create_context_no_error = true;
+		WGL_ARB_create_context_no_error = true;
 	}
 	// WGL_ARB_create_context_profile
-	if(_ARB_create_context_profile && false != checkExtension("WGL_ARB_create_context_profile"))
+	if(!WGL_ARB_create_context_profile && false != wglext::checkExtension("WGL_ARB_create_context_profile"))
 	{
-		_ARB_create_context_profile = true;
+		WGL_ARB_create_context_profile = true;
 	}
 	// WGL_ARB_create_context_robustness
-	if(checkExtension("WGL_ARB_create_context_robustness"))
+	if(!WGL_ARB_create_context_robustness && wglext::checkExtension("WGL_ARB_create_context_robustness"))
 	{
-		_ARB_create_context_robustness = true;
+		WGL_ARB_create_context_robustness = true;
 	}
 	// WGL_ARB_framebuffer_sRGB
-	if(checkExtension("WGL_ARB_framebuffer_sRGB"))
+	if(!WGL_ARB_framebuffer_sRGB && wglext::checkExtension("WGL_ARB_framebuffer_sRGB"))
 	{
-		_ARB_framebuffer_sRGB = true;
+		WGL_ARB_framebuffer_sRGB = true;
 	}
 	// WGL_ARB_make_current_read
-	if(checkExtension("WGL_ARB_make_current_read"))
+	if(!WGL_ARB_make_current_read && wglext::checkExtension("WGL_ARB_make_current_read"))
 	{
 		wglMakeContextCurrentARB = (PFNWGLMAKECONTEXTCURRENTARBPROC)wglGetProcAddress("wglMakeContextCurrentARB");
 		wglGetCurrentReadDCARB = (PFNWGLGETCURRENTREADDCARBPROC)wglGetProcAddress("wglGetCurrentReadDCARB");
-		if(wglMakeContextCurrentARB) _ARB_make_current_read = true;
+		if(wglMakeContextCurrentARB) WGL_ARB_make_current_read = true;
 	}
 	// WGL_ARB_multisample
-	if(checkExtension("WGL_ARB_multisample"))
+	if(!WGL_ARB_multisample && wglext::checkExtension("WGL_ARB_multisample"))
 	{
-		_ARB_multisample = true;
+		WGL_ARB_multisample = true;
 	}
 	// WGL_ARB_pbuffer
-	if(checkExtension("WGL_ARB_pbuffer"))
+	if(!WGL_ARB_pbuffer && wglext::checkExtension("WGL_ARB_pbuffer"))
 	{
 		wglCreatePbufferARB = (PFNWGLCREATEPBUFFERARBPROC)wglGetProcAddress("wglCreatePbufferARB");
 		wglGetPbufferDCARB = (PFNWGLGETPBUFFERDCARBPROC)wglGetProcAddress("wglGetPbufferDCARB");
 		wglReleasePbufferDCARB = (PFNWGLRELEASEPBUFFERDCARBPROC)wglGetProcAddress("wglReleasePbufferDCARB");
 		wglDestroyPbufferARB = (PFNWGLDESTROYPBUFFERARBPROC)wglGetProcAddress("wglDestroyPbufferARB");
 		wglQueryPbufferARB = (PFNWGLQUERYPBUFFERARBPROC)wglGetProcAddress("wglQueryPbufferARB");
-		if(wglCreatePbufferARB) _ARB_pbuffer = true;
+		if(wglCreatePbufferARB) WGL_ARB_pbuffer = true;
 	}
 	// WGL_ARB_pixel_format
-	if(checkExtension("WGL_ARB_pixel_format"))
+	if(!WGL_ARB_pixel_format && wglext::checkExtension("WGL_ARB_pixel_format"))
 	{
 		wglGetPixelFormatAttribivARB = (PFNWGLGETPIXELFORMATATTRIBIVARBPROC)wglGetProcAddress("wglGetPixelFormatAttribivARB");
 		wglGetPixelFormatAttribfvARB = (PFNWGLGETPIXELFORMATATTRIBFVARBPROC)wglGetProcAddress("wglGetPixelFormatAttribfvARB");
 		wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
-		if(wglGetPixelFormatAttribivARB) _ARB_pixel_format = true;
+		if(wglGetPixelFormatAttribivARB) WGL_ARB_pixel_format = true;
 	}
 	// WGL_ARB_pixel_format_float
-	if(checkExtension("WGL_ARB_pixel_format_float"))
+	if(!WGL_ARB_pixel_format_float && wglext::checkExtension("WGL_ARB_pixel_format_float"))
 	{
-		_ARB_pixel_format_float = true;
+		WGL_ARB_pixel_format_float = true;
 	}
 	// WGL_ARB_render_texture
-	if(checkExtension("WGL_ARB_render_texture"))
+	if(!WGL_ARB_render_texture && wglext::checkExtension("WGL_ARB_render_texture"))
 	{
 		wglBindTexImageARB = (PFNWGLBINDTEXIMAGEARBPROC)wglGetProcAddress("wglBindTexImageARB");
 		wglReleaseTexImageARB = (PFNWGLRELEASETEXIMAGEARBPROC)wglGetProcAddress("wglReleaseTexImageARB");
 		wglSetPbufferAttribARB = (PFNWGLSETPBUFFERATTRIBARBPROC)wglGetProcAddress("wglSetPbufferAttribARB");
-		if(wglBindTexImageARB) _ARB_render_texture = true;
+		if(wglBindTexImageARB) WGL_ARB_render_texture = true;
 	}
 	// WGL_ARB_robustness_application_isolation
-	if(checkExtension("WGL_ARB_robustness_application_isol"))
+	if(!WGL_ARB_robustness_application_isolation && wglext::checkExtension("WGL_ARB_robustness_application_isol"))
 	{
-		_ARB_robustness_application_isolation = true;
+		WGL_ARB_robustness_application_isolation = true;
 	}
 	// WGL_ARB_robustness_share_group_isolation
-	if(checkExtension("WGL_ARB_robustness_share_group_isol"))
+	if(!WGL_ARB_robustness_share_group_isolation && wglext::checkExtension("WGL_ARB_robustness_share_group_isol"))
 	{
-		_ARB_robustness_share_group_isolation = true;
+		WGL_ARB_robustness_share_group_isolation = true;
 	}
 	// WGL_3DFX_multisample
-	if(checkExtension("WGL_3DFX_multisample"))
+	if(!_3DFX_multisample && wglext::checkExtension("WGL_3DFX_multisample"))
 	{
 		_3DFX_multisample = true;
 	}
 	// WGL_3DL_stereo_control
-	if(checkExtension("WGL_3DL_stereo_control"))
+	if(!_3DL_stereo_control && wglext::checkExtension("WGL_3DL_stereo_control"))
 	{
 		wglSetStereoEmitterState3DL = (PFNWGLSETSTEREOEMITTERSTATE3DLPROC)wglGetProcAddress("wglSetStereoEmitterState3DL");
 		if(wglSetStereoEmitterState3DL) _3DL_stereo_control = true;
 	}
 
 	// WGL_AMD_gpu_association
-	if(checkExtension("WGL_AMD_gpu_association"))
+	if(!_AMD_gpu_association && wglext::checkExtension("WGL_AMD_gpu_association"))
 	{
 		wglGetGPUIDsAMD = (PFNWGLGETGPUIDSAMDPROC)wglGetProcAddress("wglGetGPUIDsAMD");
 		wglGetGPUInfoAMD = (PFNWGLGETGPUINFOAMDPROC)wglGetProcAddress("wglGetGPUInfoAMD");
@@ -375,37 +376,37 @@ IError init(bool use_dummy)
 		if(wglGetGPUIDsAMD) _AMD_gpu_association = true;
 	}
 	// WGL_ATI_pixel_format_float
-	if(checkExtension("WGL_ATI_pixel_format_float"))
+	if(!_ATI_pixel_format_float && wglext::checkExtension("WGL_ATI_pixel_format_float"))
 	{
 		_ATI_pixel_format_float = true;
 	}
 	// WGL_ATI_render_texture_rectangle
-	if(checkExtension("WGL_ATI_render_texture_rectangle"))
+	if(!_ATI_render_texture_rectangle && wglext::checkExtension("WGL_ATI_render_texture_rectangle"))
 	{
 		_ATI_render_texture_rectangle = true;
 	}
 	// WGL_EXT_colorspace
-	if(checkExtension("WGL_EXT_colorspace"))
+	if(!_EXT_colorspace && wglext::checkExtension("WGL_EXT_colorspace"))
 	{
 		_EXT_colorspace = true;
 	}
 	// WGL_EXT_create_context_es2_profile
-	if(checkExtension("WGL_EXT_create_context_es2_profile"))
+	if(!_EXT_create_context_es2_profile && wglext::checkExtension("WGL_EXT_create_context_es2_profile"))
 	{
 		_EXT_create_context_es2_profile = true;
 	}
 	// WGL_EXT_create_context_es_profile
-	if(checkExtension("WGL_EXT_create_context_es_profile"))
+	if(!_EXT_create_context_es_profile && wglext::checkExtension("WGL_EXT_create_context_es_profile"))
 	{
 		_EXT_create_context_es_profile = true;
 	}
 	// WGL_EXT_depth_float
-	if(checkExtension("WGL_EXT_depth_float"))
+	if(!_EXT_depth_float && wglext::checkExtension("WGL_EXT_depth_float"))
 	{
 		_EXT_depth_float = true;
 	}
 	// WGL_EXT_display_color_table
-	if(checkExtension("WGL_EXT_display_color_table"))
+	if(!_EXT_display_color_table && wglext::checkExtension("WGL_EXT_display_color_table"))
 	{
 		wglCreateDisplayColorTableEXT = (PFNWGLCREATEDISPLAYCOLORTABLEEXTPROC)wglGetProcAddress("wglCreateDisplayColorTableEXT");
 		wglLoadDisplayColorTableEXT = (PFNWGLLOADDISPLAYCOLORTABLEEXTPROC)wglGetProcAddress("wglLoadDisplayColorTableEXT");
@@ -414,30 +415,30 @@ IError init(bool use_dummy)
 		if(wglCreateDisplayColorTableEXT) _EXT_display_color_table = true;
 	}
 	// WGL_EXT_extensions_string
-	if(checkExtension("WGL_EXT_extensions_string"))
+	if(!_EXT_extensions_string && wglext::checkExtension("WGL_EXT_extensions_string"))
 	{
 		wglGetExtensionsStringEXT = (PFNWGLGETEXTENSIONSSTRINGEXTPROC)wglGetProcAddress("wglGetExtensionsStringEXT");
 		if(wglGetExtensionsStringEXT) _EXT_extensions_string = true;
 	}
 	// WGL_EXT_framebuffer_sRGB
-	if(checkExtension("WGL_EXT_framebuffer_sRGB"))
+	if(!_EXT_framebuffer_sRGB && wglext::checkExtension("WGL_EXT_framebuffer_sRGB"))
 	{
 		_EXT_framebuffer_sRGB = true;
 	}
 	// WGL_EXT_make_current_read
-	if(checkExtension("WGL_EXT_make_current_read"))
+	if(!_EXT_make_current_read && wglext::checkExtension("WGL_EXT_make_current_read"))
 	{
 		wglMakeContextCurrentEXT = (PFNWGLMAKECONTEXTCURRENTEXTPROC)wglGetProcAddress("wglMakeContextCurrentEXT");
 		wglGetCurrentReadDCEXT = (PFNWGLGETCURRENTREADDCEXTPROC)wglGetProcAddress("wglGetCurrentReadDCEXT");
 		if(wglMakeContextCurrentEXT) _EXT_make_current_read = true;
 	}
 	// WGL_EXT_multisample
-	if(checkExtension("WGL_EXT_multisample"))
+	if(!_EXT_multisample && wglext::checkExtension("WGL_EXT_multisample"))
 	{
 		_EXT_multisample = true;
 	}
 	// WGL_EXT_pbuffer
-	if(checkExtension("WGL_EXT_pbuffer"))
+	if(!_EXT_pbuffer && wglext::checkExtension("WGL_EXT_pbuffer"))
 	{
 		wglCreatePbufferEXT = (PFNWGLCREATEPBUFFEREXTPROC)wglGetProcAddress("wglCreatePbufferEXT");
 		wglGetPbufferDCEXT = (PFNWGLGETPBUFFERDCEXTPROC)wglGetProcAddress("wglGetPbufferDCEXT");
@@ -447,7 +448,7 @@ IError init(bool use_dummy)
 		if(wglCreatePbufferEXT) _EXT_pbuffer = true;
 	}
 	// WGL_EXT_pixel_format
-	if(checkExtension("WGL_EXT_pixel_format"))
+	if(!_EXT_pixel_format && wglext::checkExtension("WGL_EXT_pixel_format"))
 	{
 		wglGetPixelFormatAttribivEXT = (PFNWGLGETPIXELFORMATATTRIBIVEXTPROC)wglGetProcAddress("wglGetPixelFormatAttribivEXT");
 		wglGetPixelFormatAttribfvEXT = (PFNWGLGETPIXELFORMATATTRIBFVEXTPROC)wglGetProcAddress("wglGetPixelFormatAttribfvEXT");
@@ -455,36 +456,36 @@ IError init(bool use_dummy)
 		if(wglGetPixelFormatAttribivEXT) _EXT_pixel_format = true;
 	}
 	// WGL_EXT_pixel_format_packed_float
-	if(checkExtension("WGL_EXT_pixel_format_packed_float"))
+	if(!_EXT_pixel_format_packed_float && wglext::checkExtension("WGL_EXT_pixel_format_packed_float"))
 	{
 		_EXT_pixel_format_packed_float = true;
 	}
 	// WGL_EXT_swap_control
-	if(checkExtension("WGL_EXT_swap_control"))
+	if(!_EXT_swap_control && wglext::checkExtension("WGL_EXT_swap_control"))
 	{
 		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC)wglGetProcAddress("wglSwapIntervalEXT");
 		wglGetSwapIntervalEXT = (PFNWGLGETSWAPINTERVALEXTPROC)wglGetProcAddress("wglGetSwapIntervalEXT");
 		if(wglSwapIntervalEXT) _EXT_swap_control = true;
 	}
 	// WGL_EXT_swap_control
-	if(checkExtension("WGL_EXT_swap_control"))
+	if(!_EXT_swap_control && wglext::checkExtension("WGL_EXT_swap_control"))
 	{
 		_EXT_swap_control = true;
 	}
 	// WGL_EXT_swap_control_tear
-	if(checkExtension("WGL_EXT_swap_control_tear"))
+	if(!_EXT_swap_control_tear && wglext::checkExtension("WGL_EXT_swap_control_tear"))
 	{
 		_EXT_swap_control_tear = true;
 	}
 	// WGL_I3D_digital_video_control
-	if(checkExtension("WGL_I3D_digital_video_control"))
+	if(!_I3D_digital_video_control && wglext::checkExtension("WGL_I3D_digital_video_control"))
 	{
 		wglGetDigitalVideoParametersI3D = (PFNWGLGETDIGITALVIDEOPARAMETERSI3DPROC)wglGetProcAddress("wglGetDigitalVideoParametersI3D");
 		wglSetDigitalVideoParametersI3D = (PFNWGLSETDIGITALVIDEOPARAMETERSI3DPROC)wglGetProcAddress("wglSetDigitalVideoParametersI3D");
 		if(wglGetDigitalVideoParametersI3D) _I3D_digital_video_control = true;
 	}
 	// WGL_I3D_gamma
-	if(checkExtension("WGL_I3D_gamma"))
+	if(!_I3D_gamma && wglext::checkExtension("WGL_I3D_gamma"))
 	{
 		wglGetGammaTableParametersI3D = (PFNWGLGETGAMMATABLEPARAMETERSI3DPROC)wglGetProcAddress("wglGetGammaTableParametersI3D");
 		wglSetGammaTableParametersI3D = (PFNWGLSETGAMMATABLEPARAMETERSI3DPROC)wglGetProcAddress("wglSetGammaTableParametersI3D");
@@ -493,7 +494,7 @@ IError init(bool use_dummy)
 		if(wglGetGammaTableParametersI3D) _I3D_gamma = true;
 	}
 	// WGL_I3D_genlock
-	if(checkExtension("WGL_I3D_genlock"))
+	if(!_I3D_genlock && wglext::checkExtension("WGL_I3D_genlock"))
 	{
 		wglEnableGenlockI3D = (PFNWGLENABLEGENLOCKI3DPROC)wglGetProcAddress("wglEnableGenlockI3D");
 		wglDisableGenlockI3D = (PFNWGLDISABLEGENLOCKI3DPROC)wglGetProcAddress("wglDisableGenlockI3D");
@@ -510,7 +511,7 @@ IError init(bool use_dummy)
 		if(wglEnableGenlockI3D) _I3D_genlock = true;
 	}
 	// WGL_I3D_image_buffer
-	if(checkExtension("WGL_I3D_image_buffer"))
+	if(!_I3D_image_buffer && wglext::checkExtension("WGL_I3D_image_buffer"))
 	{
 		wglCreateImageBufferI3D = (PFNWGLCREATEIMAGEBUFFERI3DPROC)wglGetProcAddress("wglCreateImageBufferI3D");
 		wglDestroyImageBufferI3D = (PFNWGLDESTROYIMAGEBUFFERI3DPROC)wglGetProcAddress("wglDestroyImageBufferI3D");
@@ -519,7 +520,7 @@ IError init(bool use_dummy)
 		if(wglCreateImageBufferI3D) _I3D_image_buffer = true;
 	}
 	// WGL_I3D_swap_frame_lock
-	if(checkExtension("WGL_I3D_swap_frame_lock"))
+	if(!_I3D_swap_frame_lock && wglext::checkExtension("WGL_I3D_swap_frame_lock"))
 	{
 		wglEnableFrameLockI3D = (PFNWGLENABLEFRAMELOCKI3DPROC)wglGetProcAddress("wglEnableFrameLockI3D");
 		wglDisableFrameLockI3D = (PFNWGLDISABLEFRAMELOCKI3DPROC)wglGetProcAddress("wglDisableFrameLockI3D");
@@ -528,7 +529,7 @@ IError init(bool use_dummy)
 		if(wglEnableFrameLockI3D) _I3D_swap_frame_lock = true;
 	}
 	// WGL_I3D_swap_frame_usage
-	if(checkExtension("WGL_I3D_swap_frame_usage"))
+	if(!_I3D_swap_frame_usage && wglext::checkExtension("WGL_I3D_swap_frame_usage"))
 	{
 		wglGetFrameUsageI3D = (PFNWGLGETFRAMEUSAGEI3DPROC)wglGetProcAddress("wglGetFrameUsageI3D");
 		wglBeginFrameTrackingI3D = (PFNWGLBEGINFRAMETRACKINGI3DPROC)wglGetProcAddress("wglBeginFrameTrackingI3D");
@@ -537,7 +538,7 @@ IError init(bool use_dummy)
 		if(wglGetFrameUsageI3D) _I3D_swap_frame_usage = true;
 	}
 	// WGL_NV_DX_interop
-	if(checkExtension("WGL_NV_DX_interop"))
+	if(!_NV_DX_interop && wglext::checkExtension("WGL_NV_DX_interop"))
 	{
 		wglDXSetResourceShareHandleNV = (PFNWGLDXSETRESOURCESHAREHANDLENVPROC)wglGetProcAddress("wglDXSetResourceShareHandleNV");
 		wglDXOpenDeviceNV = (PFNWGLDXOPENDEVICENVPROC)wglGetProcAddress("wglDXOpenDeviceNV");
@@ -550,29 +551,29 @@ IError init(bool use_dummy)
 		if(wglDXSetResourceShareHandleNV) _NV_DX_interop = true;
 	}
 	// WGL_NV_DX_interop2
-	if(checkExtension("WGL_NV_DX_interop2"))
+	if(!_NV_DX_interop2 && wglext::checkExtension("WGL_NV_DX_interop2"))
 	{
 		_NV_DX_interop2 = true;
 	}
 	// WGL_NV_copy_image
-	if(checkExtension("WGL_NV_copy_image"))
+	if(!_NV_copy_image && wglext::checkExtension("WGL_NV_copy_image"))
 	{
 		wglCopyImageSubDataNV = (PFNWGLCOPYIMAGESUBDATANVPROC)wglGetProcAddress("wglCopyImageSubDataNV");
 		if(wglCopyImageSubDataNV) _NV_copy_image = true;
 	}
 	// WGL_NV_delay_before_swap
-	if(checkExtension("WGL_NV_delay_before_swap"))
+	if(!_NV_delay_before_swap && wglext::checkExtension("WGL_NV_delay_before_swap"))
 	{
 		wglDelayBeforeSwapNV = (PFNWGLDELAYBEFORESWAPNVPROC)wglGetProcAddress("wglDelayBeforeSwapNV");
 		if(wglDelayBeforeSwapNV) _NV_delay_before_swap = true;
 	}
 	// WGL_NV_float_buffer
-	if(checkExtension("WGL_NV_float_buffer"))
+	if(!_NV_float_buffer && wglext::checkExtension("WGL_NV_float_buffer"))
 	{
 		_NV_float_buffer = true;
 	}
 	// WGL_NV_gpu_affinity
-	if(checkExtension("WGL_NV_gpu_affinity"))
+	if(!_NV_gpu_affinity && wglext::checkExtension("WGL_NV_gpu_affinity"))
 	{
 		wglEnumGpusNV = (PFNWGLENUMGPUSNVPROC)wglGetProcAddress("wglEnumGpusNV");
 		wglEnumGpuDevicesNV = (PFNWGLENUMGPUDEVICESNVPROC)wglGetProcAddress("wglEnumGpuDevicesNV");
@@ -582,17 +583,17 @@ IError init(bool use_dummy)
 		if(wglEnumGpusNV) _NV_gpu_affinity = true;
 	}
 	// WGL_NV_multigpu_context
-	if(checkExtension("WGL_NV_multigpu_context"))
+	if(!_NV_multigpu_context && wglext::checkExtension("WGL_NV_multigpu_context"))
 	{
 		_NV_multigpu_context = true;
 	}
 	// WGL_NV_multisample_coverage
-	if(checkExtension("WGL_NV_multisample_coverage"))
+	if(!_NV_multisample_coverage && wglext::checkExtension("WGL_NV_multisample_coverage"))
 	{
 		_NV_multisample_coverage = true;
 	}
 	// WGL_NV_present_video
-	if(checkExtension("WGL_NV_present_video"))
+	if(!_NV_present_video && wglext::checkExtension("WGL_NV_present_video"))
 	{
 		wglEnumerateVideoDevicesNV = (PFNWGLENUMERATEVIDEODEVICESNVPROC)wglGetProcAddress("wglEnumerateVideoDevicesNV");
 		wglBindVideoDeviceNV = (PFNWGLBINDVIDEODEVICENVPROC)wglGetProcAddress("wglBindVideoDeviceNV");
@@ -600,17 +601,17 @@ IError init(bool use_dummy)
 		if(wglEnumerateVideoDevicesNV) _NV_present_video = true;
 	}
 	// WGL_NV_render_depth_texture
-	if(checkExtension("WGL_NV_render_depth_texture"))
+	if(!_NV_render_depth_texture && wglext::checkExtension("WGL_NV_render_depth_texture"))
 	{
 		_NV_render_depth_texture = true;
 	}
 	// WGL_NV_render_texture_rectangle
-	if(checkExtension("WGL_NV_render_texture_rectangle"))
+	if(!_NV_render_texture_rectangle && wglext::checkExtension("WGL_NV_render_texture_rectangle"))
 	{
 		_NV_render_texture_rectangle = true;
 	}
 	// WGL_NV_swap_group
-	if(checkExtension("WGL_NV_swap_group"))
+	if(!_NV_swap_group && wglext::checkExtension("WGL_NV_swap_group"))
 	{
 		wglJoinSwapGroupNV = (PFNWGLJOINSWAPGROUPNVPROC)wglGetProcAddress("wglJoinSwapGroupNV");
 		wglBindSwapBarrierNV = (PFNWGLBINDSWAPBARRIERNVPROC)wglGetProcAddress("wglBindSwapBarrierNV");
@@ -621,7 +622,7 @@ IError init(bool use_dummy)
 		if(wglJoinSwapGroupNV) _NV_swap_group = true;
 	}
 	// WGL_NV_vertex_array_range
-	if(checkExtension("WGL_NV_vertex_array_range"))
+	if(!_NV_vertex_array_range && wglext::checkExtension("WGL_NV_vertex_array_range"))
 	{
 		wglAllocateMemoryNV = (PFNWGLALLOCATEMEMORYNVPROC)wglGetProcAddress("wglAllocateMemoryNV");
 		wglFreeMemoryNV = (PFNWGLFREEMEMORYNVPROC)wglGetProcAddress("wglFreeMemoryNV");
@@ -629,7 +630,7 @@ IError init(bool use_dummy)
 		else _NV_vertex_array_range = false;
 	}
 	// WGL_NV_video_capture
-	if(checkExtension("WGL_NV_video_capture"))
+	if(!_NV_video_capture && wglext::checkExtension("WGL_NV_video_capture"))
 	{
 		wglBindVideoCaptureDeviceNV = (PFNWGLBINDVIDEOCAPTUREDEVICENVPROC)wglGetProcAddress("wglBindVideoCaptureDeviceNV");
 		wglEnumerateVideoCaptureDevicesNV = (PFNWGLENUMERATEVIDEOCAPTUREDEVICESNVPROC)wglGetProcAddress("wglEnumerateVideoCaptureDevicesNV");
@@ -640,7 +641,7 @@ IError init(bool use_dummy)
 		else _NV_video_capture = false;
 	}
 	// WGL_NV_video_output
-	if(checkExtension("WGL_NV_video_output"))
+	if(!_NV_video_output && wglext::checkExtension("WGL_NV_video_output"))
 	{
 		wglGetVideoDeviceNV = (PFNWGLGETVIDEODEVICENVPROC)wglGetProcAddress("wglGetVideoDeviceNV");
 		wglReleaseVideoDeviceNV = (PFNWGLRELEASEVIDEODEVICENVPROC)wglGetProcAddress("wglReleaseVideoDeviceNV");
@@ -652,7 +653,7 @@ IError init(bool use_dummy)
 		else _NV_video_output = false;
 	}
 	// WGL_OML_sync_control
-	if(checkExtension("WGL_OML_sync_control"))
+	if(!_OML_sync_control && wglext::checkExtension("WGL_OML_sync_control"))
 	{
 		wglGetSyncValuesOML = (PFNWGLGETSYNCVALUESOMLPROC)wglGetProcAddress("wglGetSyncValuesOML");
 		wglGetMscRateOML = (PFNWGLGETMSCRATEOMLPROC)wglGetProcAddress("wglGetMscRateOML");
@@ -674,40 +675,44 @@ void cleanup(void)
 
 bool checkExtension(const char* extension, bool use_dummy)
 {
+	if(!extension) return false;
+	const int ext_len = std::strlen(extension);
+	if(ext_len <= 0) return false;
 	if(use_dummy) 
 	{
-		if(glw::Dummy::IERR_NONE != GlobalDummy.init() || false == GlobalDummy.makeCurrent()) return false;
+		if(glw::Dummy::IERR_NONE != GlobalDummy.init() || !GlobalDummy.makeCurrent()) return false;
 		if(!wglGetCurrentContext()) return false;
 	}
 	// WGL_ARB_extensions_string
 	if(!wglGetExtensionsStringARB)
 	{
 		wglGetExtensionsStringARB = (PFNWGLGETEXTENSIONSSTRINGARBPROC)wglGetProcAddress("wglGetExtensionsStringARB");
-		if(wglGetExtensionsStringARB && !_ARB_extensions_string) _ARB_extensions_string = 1;
+		if(wglGetExtensionsStringARB && !WGL_ARB_extensions_string) WGL_ARB_extensions_string = 1;
 	}
 	const char* wgl_extensions;
-	if(wglGetExtensionsStringARB)
+	if(WGL_ARB_extensions_string)
 		wgl_extensions = wglGetExtensionsStringARB(wglGetCurrentDC());
 	else wgl_extensions = (const char*)glGetString(GL_EXTENSIONS);
 	if(wgl_extensions)
 	{
-		int current_len = 0, i = 0, last_i = 0, loop_exit = 0;
+		int i = 0, last_i = 0, len = 0;
 		for(i=0; i<0xfffff; ++i)
 		{
 			switch (wgl_extensions[i])
 			{
-			case '\0':
-				if(0 == strncmp(&wgl_extensions[last_i], extension, (i - last_i))) return true;
-				loop_exit = 1;
-				break;
-			case ' ':
-				if(0 == strncmp(&wgl_extensions[last_i], extension, (i - last_i))) return true;
-				last_i = i + 1;
-				break;
-			default:
-				continue;
+				case '\0':
+					len = i - last_i;
+					if(len == ext_len && 0 == std::strncmp(&wgl_extensions[last_i], extension, len))
+						return true;
+					return false;
+				case ' ':
+					len = i - last_i;
+					if(len == ext_len && 0 == std::strncmp(&wgl_extensions[last_i], extension, len))
+						return true;
+					last_i = i + 1;
+				default:
+					continue;
 			}
-			if(loop_exit) break;
 		}
 	}
 	return false;

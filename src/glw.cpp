@@ -1,5 +1,5 @@
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #if PLATFORM==PLATFORM_WINDOWS
 #include "platform/win32/glProc.inl"
 #endif
@@ -346,32 +346,32 @@ bool V_4_6 = false;
 
 namespace glext {
 
-bool arb_arrays_of_arrays;
+bool GL_ARB_arrays_of_arrays;
 PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC glDrawArraysInstancedBaseInstance = (PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC)0;
 PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC glDrawElementsInstancedBaseInstance = (PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC)0;
 PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC glDrawElementsInstancedBaseVertexBaseInstance = (PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC)0;
-bool arb_base_instance = false;
+bool GL_ARB_base_instance = false;
 PFNGLBINDFRAGDATALOCATIONINDEXEDPROC glBindFragDataLocationIndexed = (PFNGLBINDFRAGDATALOCATIONINDEXEDPROC)0;
 PFNGLGETFRAGDATAINDEXPROC glGetFragDataIndex = (PFNGLGETFRAGDATAINDEXPROC)0;
-bool arb_blend_func_extended = false;
+bool GL_ARB_blend_func_extended = false;
 PFNGLBUFFERSTORAGEPROC glBufferStorage = (PFNGLBUFFERSTORAGEPROC)0;
-bool arb_buffer_storage = false;
+bool GL_ARB_buffer_storage = false;
 PFNGLCLEARBUFFERDATAPROC glClearBufferData = (PFNGLCLEARBUFFERDATAPROC)0;
 PFNGLCLEARBUFFERSUBDATAPROC glClearBufferSubData = (PFNGLCLEARBUFFERSUBDATAPROC)0;
 PFNGLCLEARNAMEDBUFFERDATAEXTPROC glClearNamedBufferDataEXT = (PFNGLCLEARNAMEDBUFFERDATAEXTPROC)0;
 PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC glClearNamedBufferSubDataEXT = (PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)0;
-bool arb_clear_buffer_object = false;
+bool GL_ARB_clear_buffer_object = false;
 PFNGLCLEARDEPTHFPROC glClearDepthf = (PFNGLCLEARDEPTHFPROC)0;
 PFNGLDEPTHRANGEFPROC glDepthRangef = (PFNGLDEPTHRANGEFPROC)0;
 PFNGLGETSHADERPRECISIONFORMATPROC glGetShaderPrecisionFormat = (PFNGLGETSHADERPRECISIONFORMATPROC)0;
 PFNGLRELEASESHADERCOMPILERPROC glReleaseShaderCompiler = (PFNGLRELEASESHADERCOMPILERPROC)0;
 PFNGLSHADERBINARYPROC glShaderBinary = (PFNGLSHADERBINARYPROC)0;
-bool arb_ES2_compatibility = false;
-bool arb_ES3_compatibility = false;
+bool GL_ARB_ES2_compatibility = false;
+bool GL_ARB_ES3_compatibility = false;
 PFNGLMEMORYBARRIERBYREGIONPROC glMemoryBarrierByRegion = (PFNGLMEMORYBARRIERBYREGIONPROC)0;
-bool arb_ES3_1_compatibility = false;
+bool GL_ARB_ES3_1_compatibility = false;
 PFNGLPRIMITIVEBOUNDINGBOXARBPROC glPrimitiveBoundingBoxARB = (PFNGLPRIMITIVEBOUNDINGBOXARBPROC)0;
-bool arb_ES3_2_compatibility = false;
+bool GL_ARB_ES3_2_compatibility = false;
 PFNGLCOLORSUBTABLEPROC glColorSubTable = (PFNGLCOLORSUBTABLEPROC)0;
 PFNGLCOLORTABLEPROC glColorTable = (PFNGLCOLORTABLEPROC)0;
 PFNGLCOLORTABLEPARAMETERFVPROC glColorTableParameterfv = (PFNGLCOLORTABLEPARAMETERFVPROC)0;
@@ -404,7 +404,7 @@ PFNGLMINMAXPROC glMinmax = (PFNGLMINMAXPROC)0;
 PFNGLRESETHISTOGRAMPROC glResetHistogram = (PFNGLRESETHISTOGRAMPROC)0;
 PFNGLRESETMINMAXPROC glResetMinmax = (PFNGLRESETMINMAXPROC)0;
 PFNGLSEPARABLEFILTER2DPROC glSeparableFilter2D = (PFNGLSEPARABLEFILTER2DPROC)0;
-bool arb_imaging = false;
+bool GL_ARB_imaging = false;
 PFNGLCLIENTWAITSYNCPROC glClientWaitSync = (PFNGLCLIENTWAITSYNCPROC)0;
 PFNGLDELETESYNCPROC glDeleteSync = (PFNGLDELETESYNCPROC)0;
 PFNGLFENCESYNCPROC glFenceSync = (PFNGLFENCESYNCPROC)0;
@@ -412,11 +412,11 @@ PFNGLGETINTEGER64VPROC glGetInteger64v = (PFNGLGETINTEGER64VPROC)0;
 PFNGLGETSYNCIVPROC glGetSynciv = (PFNGLGETSYNCIVPROC)0;
 PFNGLISSYNCPROC glIsSync = (PFNGLISSYNCPROC)0;
 PFNGLWAITSYNCPROC glWaitSync = (PFNGLWAITSYNCPROC)0;
-bool arb_shadow = false;
-bool arb_sync = false;
+bool GL_ARB_shadow = false;
+bool GL_ARB_sync = false;
 PFNGLPATCHPARAMETERFVPROC glPatchParameterfv = (PFNGLPATCHPARAMETERFVPROC)0;
 PFNGLPATCHPARAMETERIPROC glPatchParameteri = (PFNGLPATCHPARAMETERIPROC)0;
-bool arb_tessellation_shader = false;
+bool GL_ARB_tessellation_shader = false;
 
 } // namespace axl.glw.glext
 
@@ -435,8 +435,8 @@ InitError init(bool use_dummy)
 	if(use_dummy && (Dummy::IERR_NONE != GlobalDummy.init() || false == GlobalDummy.makeCurrent())) return IERR_DUMMY;
 	if(!wglGetCurrentContext()) return IERR_NO_CONTEXT;
 	const char* gl_version = (const char*)glGetString(GL_VERSION);
-	int major = (int)atof(gl_version);
-	int minor = (int)atof(gl_version[1] == '.' ? &gl_version[2] : gl_version[2] == '.' ? &gl_version[3] : &gl_version[4]);
+	int major = (int)std::atof(gl_version);
+	int minor = (int)std::atof(gl_version[1] == '.' ? &gl_version[2] : gl_version[2] == '.' ? &gl_version[3] : &gl_version[4]);
 	GL_MAJOR_VERSION = major;
 	GL_MINOR_VERSION = minor;
 	if(GL_NUM_EXTENSIONS < 0) 
@@ -844,28 +844,28 @@ InitError init(bool use_dummy)
 	// glext
 	if(axl::glw::checkExtension("GL_ARB_arrays_of_arrays"))
 	{
-		arb_arrays_of_arrays = true;
+		GL_ARB_arrays_of_arrays = true;
 	}
 	if(axl::glw::checkExtension("GL_ARB_base_instance"))
 	{
 		glDrawArraysInstancedBaseInstance = (PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC)GetGLProcAddress("glDrawArraysInstancedBaseInstance");
 		glDrawElementsInstancedBaseInstance = (PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC)GetGLProcAddress("glDrawElementsInstancedBaseInstance");
 		glDrawElementsInstancedBaseVertexBaseInstance = (PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC)GetGLProcAddress("glDrawElementsInstancedBaseVertexBaseInstance");
-		if(glDrawArraysInstancedBaseInstance && glDrawElementsInstancedBaseInstance && glDrawElementsInstancedBaseVertexBaseInstance) arb_base_instance = true;
-		arb_base_instance = false;
+		if(glDrawArraysInstancedBaseInstance && glDrawElementsInstancedBaseInstance && glDrawElementsInstancedBaseVertexBaseInstance) GL_ARB_base_instance = true;
+		GL_ARB_base_instance = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_blend_func_extended"))
 	{	
 		glBindFragDataLocationIndexed = (PFNGLBINDFRAGDATALOCATIONINDEXEDPROC)GetGLProcAddress("glBindFragDataLocationIndexed");
 		glGetFragDataIndex = (PFNGLGETFRAGDATAINDEXPROC)GetGLProcAddress("glGetFragDataIndex");
-		if(glBindFragDataLocationIndexed && glGetFragDataIndex) arb_blend_func_extended = true;
-		else arb_blend_func_extended = false;
+		if(glBindFragDataLocationIndexed && glGetFragDataIndex) GL_ARB_blend_func_extended = true;
+		else GL_ARB_blend_func_extended = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_buffer_storage"))
 	{	
 		glBufferStorage = (PFNGLBUFFERSTORAGEPROC)GetGLProcAddress("glBufferStorage");
-		if(glBufferStorage) arb_buffer_storage = true;
-		else arb_buffer_storage = false;
+		if(glBufferStorage) GL_ARB_buffer_storage = true;
+		else GL_ARB_buffer_storage = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_clear_buffer_object"))
 	{	
@@ -873,8 +873,8 @@ InitError init(bool use_dummy)
 		glClearBufferSubData = (PFNGLCLEARBUFFERSUBDATAPROC)GetGLProcAddress("glClearBufferSubData");
 		glClearNamedBufferDataEXT = (PFNGLCLEARNAMEDBUFFERDATAEXTPROC)GetGLProcAddress("glClearNamedBufferDataEXT");
 		glClearNamedBufferSubDataEXT = (PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)GetGLProcAddress("glClearNamedBufferSubDataEXT");
-		if(glClearBufferData && glClearBufferSubData && glClearNamedBufferDataEXT && glClearNamedBufferSubDataEXT) arb_clear_buffer_object = true;
-		else arb_clear_buffer_object = false;
+		if(glClearBufferData && glClearBufferSubData && glClearNamedBufferDataEXT && glClearNamedBufferSubDataEXT) GL_ARB_clear_buffer_object = true;
+		else GL_ARB_clear_buffer_object = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_ES2_compatibility"))
 	{	
@@ -883,24 +883,24 @@ InitError init(bool use_dummy)
 		glGetShaderPrecisionFormat = (PFNGLGETSHADERPRECISIONFORMATPROC)GetGLProcAddress("glGetShaderPrecisionFormat");
 		glReleaseShaderCompiler = (PFNGLRELEASESHADERCOMPILERPROC)GetGLProcAddress("glReleaseShaderCompiler");
 		glShaderBinary = (PFNGLSHADERBINARYPROC)GetGLProcAddress("glShaderBinary");
-		if( glClearDepthf && glDepthRangef && glGetShaderPrecisionFormat && glReleaseShaderCompiler && glShaderBinary) arb_ES2_compatibility = true;
-		else arb_ES2_compatibility = false;
+		if( glClearDepthf && glDepthRangef && glGetShaderPrecisionFormat && glReleaseShaderCompiler && glShaderBinary) GL_ARB_ES2_compatibility = true;
+		else GL_ARB_ES2_compatibility = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_ES3_compatibility"))
 	{	
-		arb_ES3_compatibility = true;
+		GL_ARB_ES3_compatibility = true;
 	}
 	if(axl::glw::checkExtension("GL_ARB_ES3_1_compatibility"))
 	{	
 		glMemoryBarrierByRegion = (PFNGLMEMORYBARRIERBYREGIONPROC)GetGLProcAddress("glMemoryBarrierByRegion");
-		if(glMemoryBarrierByRegion) arb_ES3_1_compatibility = true;
-		arb_ES3_1_compatibility = false;
+		if(glMemoryBarrierByRegion) GL_ARB_ES3_1_compatibility = true;
+		GL_ARB_ES3_1_compatibility = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_ES3_2_compatibility"))
 	{	
 		glPrimitiveBoundingBoxARB = (PFNGLPRIMITIVEBOUNDINGBOXARBPROC)GetGLProcAddress("glPrimitiveBoundingBoxARB");
-		if(glPrimitiveBoundingBoxARB) arb_ES3_2_compatibility = true;
-		else arb_ES3_2_compatibility = false;
+		if(glPrimitiveBoundingBoxARB) GL_ARB_ES3_2_compatibility = true;
+		else GL_ARB_ES3_2_compatibility = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_imaging"))
 	{	
@@ -936,12 +936,12 @@ InitError init(bool use_dummy)
 		glResetHistogram = (PFNGLRESETHISTOGRAMPROC)GetGLProcAddress("glResetHistogram");
 		glResetMinmax = (PFNGLRESETMINMAXPROC)GetGLProcAddress("glResetMinmax");
 		glSeparableFilter2D = (PFNGLSEPARABLEFILTER2DPROC)GetGLProcAddress("glSeparableFilter2D");
-		if(glColorSubTable && glColorTable && glColorTableParameterfv && glColorTableParameteriv && glConvolutionFilter1D && glConvolutionFilter2D && glConvolutionParameterf && glConvolutionParameterfv && glConvolutionParameteri && glConvolutionParameteriv && glCopyColorSubTable && glCopyColorTable && glCopyConvolutionFilter1D && glCopyConvolutionFilter2D && glGetColorTable && glGetColorTableParameterfv && glGetColorTableParameteriv && glGetConvolutionFilter && glGetConvolutionParameterfv && glGetConvolutionParameteriv && glGetHistogram && glGetHistogramParameterfv && glGetHistogramParameteriv && glGetMinmax && glGetMinmaxParameterfv && glGetMinmaxParameteriv && glGetSeparableFilter && glHistogram && glMinmax && glResetHistogram && glResetMinmax && glSeparableFilter2D) arb_imaging = true;
-		else arb_imaging = false;
+		if(glColorSubTable && glColorTable && glColorTableParameterfv && glColorTableParameteriv && glConvolutionFilter1D && glConvolutionFilter2D && glConvolutionParameterf && glConvolutionParameterfv && glConvolutionParameteri && glConvolutionParameteriv && glCopyColorSubTable && glCopyColorTable && glCopyConvolutionFilter1D && glCopyConvolutionFilter2D && glGetColorTable && glGetColorTableParameterfv && glGetColorTableParameteriv && glGetConvolutionFilter && glGetConvolutionParameterfv && glGetConvolutionParameteriv && glGetHistogram && glGetHistogramParameterfv && glGetHistogramParameteriv && glGetMinmax && glGetMinmaxParameterfv && glGetMinmaxParameteriv && glGetSeparableFilter && glHistogram && glMinmax && glResetHistogram && glResetMinmax && glSeparableFilter2D) GL_ARB_imaging = true;
+		else GL_ARB_imaging = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_shadow"))
 	{
-		arb_shadow = true;
+		GL_ARB_shadow = true;
 	}
 	if(axl::glw::checkExtension("GL_ARB_sync"))
 	{	
@@ -952,15 +952,15 @@ InitError init(bool use_dummy)
 		glGetSynciv = (PFNGLGETSYNCIVPROC)GetGLProcAddress("glGetSynciv");
 		glIsSync = (PFNGLISSYNCPROC)GetGLProcAddress("glIsSync");
 		glWaitSync = (PFNGLWAITSYNCPROC)GetGLProcAddress("glWaitSync");
-		if(glClientWaitSync && glDeleteSync && glFenceSync && glGetInteger64v && glGetSynciv && glIsSync && glWaitSync) arb_sync = true;
-		else arb_sync = false;
+		if(glClientWaitSync && glDeleteSync && glFenceSync && glGetInteger64v && glGetSynciv && glIsSync && glWaitSync) GL_ARB_sync = true;
+		else GL_ARB_sync = false;
 	}
 	if(axl::glw::checkExtension("GL_ARB_tessellation_shader"))
 	{	
 		glPatchParameterfv = (PFNGLPATCHPARAMETERFVPROC)GetGLProcAddress("glPatchParameterfv");
 		glPatchParameteri = (PFNGLPATCHPARAMETERIPROC)GetGLProcAddress("glPatchParameteri");
-		if(glPatchParameterfv && glPatchParameteri) arb_tessellation_shader = true;
-		else arb_tessellation_shader = true;
+		if(glPatchParameterfv && glPatchParameteri) GL_ARB_tessellation_shader = true;
+		else GL_ARB_tessellation_shader = true;
 	}
 	initialized = true;
 	return IERR_NONE;
@@ -978,6 +978,9 @@ bool checkExtension(const char* extension, bool use_dummy)
 {
 	using namespace gl;
 	using namespace gl3;
+	if(!extension) return false;
+	const int ext_len = std::strlen(extension);
+	if(ext_len <= 0) return false;
 	if(use_dummy) 
 	{
 		if(Dummy::IERR_NONE != GlobalDummy.init() || false == GlobalDummy.makeCurrent()) return false;
@@ -985,7 +988,7 @@ bool checkExtension(const char* extension, bool use_dummy)
 	}
 	if(glw::GL_MAJOR_VERSION >= 3)
 	{
-		if(glw::GL_NUM_EXTENSIONS < 0) 
+		if(glw::GL_NUM_EXTENSIONS <= 0) 
 		{
 			GLint num_ext;
 			glGetIntegerv(GL_GL_NUM_EXTENSIONS, &num_ext);
@@ -1002,23 +1005,22 @@ bool checkExtension(const char* extension, bool use_dummy)
 		const char* ext = (const char*)glGetString(GL_EXTENSIONS);
 		if(ext)
 		{
-			int current_len = 0, i = 0, last_i = 0, loop_exit = 0;
+			int len = 0, i = 0, last_i = 0;
 			for(i=0; i<0xfffff; ++i)
 			{
 				switch (ext[i])
 				{
 				case '\0':
-					if(0 == strncmp(&ext[last_i], extension, (i - last_i))) return true;
-					loop_exit = 1;
-					break;
+					len = (i - last_i);
+					if(ext_len == len && 0 == std::strncmp(&ext[last_i], extension, len)) return true;
+					return false;
 				case ' ':
-					if(0 == strncmp(&ext[last_i], extension, (i - last_i))) return true;
+					len = (i - last_i);
+					if(ext_len == len && 0 == std::strncmp(&ext[last_i], extension, len)) return true;
 					last_i = i + 1;
-					break;
 				default:
 					continue;
 				}
-				if(loop_exit) break;
 			}
 		}
 	}

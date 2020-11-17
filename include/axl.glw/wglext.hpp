@@ -28,13 +28,13 @@ AXLGLWAPI PFNWGLCREATEBUFFERREGIONARBPROC wglCreateBufferRegionARB;
 AXLGLWAPI PFNWGLDELETEBUFFERREGIONARBPROC wglDeleteBufferRegionARB;
 AXLGLWAPI PFNWGLSAVEBUFFERREGIONARBPROC wglSaveBufferRegionARB;
 AXLGLWAPI PFNWGLRESTOREBUFFERREGIONARBPROC wglRestoreBufferRegionARB;
-AXLGLWAPI bool _ARB_buffer_region;
+AXLGLWAPI bool WGL_ARB_buffer_region;
 
 // WGL_ARB_context_flush_control
 constexpr long WGL_CONTEXT_RELEASE_BEHAVIOR_ARB = 0x2097;
 constexpr long WGL_CONTEXT_RELEASE_BEHAVIOR_NONE_ARB = 0;
 constexpr long WGL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB = 0x2098;
-AXLGLWAPI bool _ARB_context_flush_control;
+AXLGLWAPI bool WGL_ARB_context_flush_control;
 
 // WGL_ARB_create_context
 constexpr long WGL_CONTEXT_DEBUG_BIT_ARB = 0x00000001;
@@ -46,34 +46,34 @@ constexpr long WGL_CONTEXT_FLAGS_ARB = 0x2094;
 constexpr long ERROR_INVALID_VERSION_ARB = 0x2095;
 typedef HGLRC (WINAPI * PFNWGLCREATECONTEXTATTRIBSARBPROC) (HDC hDC, HGLRC hShareContext, const int *attribList);
 AXLGLWAPI PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
-AXLGLWAPI bool _ARB_create_context;
+AXLGLWAPI bool WGL_ARB_create_context;
 
 // WGL_ARB_create_context_no_error
 constexpr long WGL_CONTEXT_OPENGL_NO_ERROR_ARB = 0x31B3;
-AXLGLWAPI bool _ARB_create_context_no_error;
+AXLGLWAPI bool WGL_ARB_create_context_no_error;
 
 // WGL_ARB_create_context_profile
 constexpr long WGL_CONTEXT_PROFILE_MASK_ARB = 0x9126;
 constexpr long WGL_CONTEXT_CORE_PROFILE_BIT_ARB = 0x00000001;
 constexpr long WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB = 0x00000002;
 constexpr long ERROR_INVALID_PROFILE_ARB = 0x2096;
-AXLGLWAPI bool _ARB_create_context_profile;
+AXLGLWAPI bool WGL_ARB_create_context_profile;
 
 // WGL_ARB_create_context_robustness
 constexpr long WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB = 0x00000004;
 constexpr long WGL_LOSE_CONTEXT_ON_RESET_ARB = 0x8252;
 constexpr long WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256;
 constexpr long WGL_NO_RESET_NOTIFICATION_ARB = 0x8261;
-AXLGLWAPI bool _ARB_create_context_robustness;
+AXLGLWAPI bool WGL_ARB_create_context_robustness;
 
 // WGL_ARB_extensions_string
 typedef const char *(WINAPI * PFNWGLGETEXTENSIONSSTRINGARBPROC) (HDC hdc);
 AXLGLWAPI PFNWGLGETEXTENSIONSSTRINGARBPROC wglGetExtensionsStringARB;
-AXLGLWAPI bool _ARB_extensions_string;
+AXLGLWAPI bool WGL_ARB_extensions_string;
 
 // WGL_ARB_framebuffer_sRGB
 constexpr long WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB = 0x20A9;
-AXLGLWAPI bool _ARB_framebuffer_sRGB;
+AXLGLWAPI bool WGL_ARB_framebuffer_sRGB;
 
 // WGL_ARB_make_current_read
 constexpr long ERROR_INVALID_PIXEL_TYPE_ARB = 0x2043;
@@ -82,12 +82,12 @@ typedef BOOL (WINAPI * PFNWGLMAKECONTEXTCURRENTARBPROC) (HDC hDrawDC, HDC hReadD
 typedef HDC (WINAPI * PFNWGLGETCURRENTREADDCARBPROC) (void);
 AXLGLWAPI PFNWGLMAKECONTEXTCURRENTARBPROC wglMakeContextCurrentARB;
 AXLGLWAPI PFNWGLGETCURRENTREADDCARBPROC wglGetCurrentReadDCARB;
-AXLGLWAPI bool _ARB_make_current_read;
+AXLGLWAPI bool WGL_ARB_make_current_read;
 
 // WGL_ARB_multisample
 constexpr long WGL_SAMPLE_BUFFERS_ARB = 0x2041;
 constexpr long WGL_SAMPLES_ARB = 0x2042;
-AXLGLWAPI bool _ARB_multisample;
+AXLGLWAPI bool WGL_ARB_multisample;
 
 // WGL_ARB_pbuffer
 DECLARE_HANDLE(HPBUFFERARB);
@@ -109,7 +109,7 @@ AXLGLWAPI PFNWGLGETPBUFFERDCARBPROC wglGetPbufferDCARB;
 AXLGLWAPI PFNWGLRELEASEPBUFFERDCARBPROC wglReleasePbufferDCARB;
 AXLGLWAPI PFNWGLDESTROYPBUFFERARBPROC wglDestroyPbufferARB;
 AXLGLWAPI PFNWGLQUERYPBUFFERARBPROC wglQueryPbufferARB;
-AXLGLWAPI bool _ARB_pbuffer;
+AXLGLWAPI bool WGL_ARB_pbuffer;
 
 // WGL_ARB_pixel_format
 constexpr long WGL_NUMBER_PIXEL_FORMATS_ARB = 0x2000;
@@ -167,11 +167,11 @@ typedef BOOL (WINAPI * PFNWGLCHOOSEPIXELFORMATARBPROC) (HDC hdc, const int *piAt
 AXLGLWAPI PFNWGLGETPIXELFORMATATTRIBIVARBPROC wglGetPixelFormatAttribivARB;
 AXLGLWAPI PFNWGLGETPIXELFORMATATTRIBFVARBPROC wglGetPixelFormatAttribfvARB;
 AXLGLWAPI PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
-AXLGLWAPI bool _ARB_pixel_format;
+AXLGLWAPI bool WGL_ARB_pixel_format;
 
 // WGL_ARB_pixel_format_float
 constexpr long WGL_TYPE_RGBA_FLOAT_ARB = 0x21A0;
-AXLGLWAPI bool _ARB_pixel_format_float;
+AXLGLWAPI bool WGL_ARB_pixel_format_float;
 
 // WGL_ARB_render_texture
 constexpr long WGL_BIND_TO_TEXTURE_RGB_ARB = 0x2070;
@@ -213,14 +213,14 @@ typedef BOOL (WINAPI * PFNWGLSETPBUFFERATTRIBARBPROC) (HPBUFFERARB hPbuffer, con
 AXLGLWAPI PFNWGLBINDTEXIMAGEARBPROC wglBindTexImageARB;
 AXLGLWAPI PFNWGLRELEASETEXIMAGEARBPROC wglReleaseTexImageARB;
 AXLGLWAPI PFNWGLSETPBUFFERATTRIBARBPROC wglSetPbufferAttribARB;
-AXLGLWAPI bool _ARB_render_texture;
+AXLGLWAPI bool WGL_ARB_render_texture;
 
 // WGL_ARB_robustness_application_isolation
 constexpr long WGL_CONTEXT_RESET_ISOLATION_BIT_ARB = 0x00000008;
-AXLGLWAPI bool _ARB_robustness_application_isolation;
+AXLGLWAPI bool WGL_ARB_robustness_application_isolation;
 
 // WGL_ARB_robustness_share_group_isolation
-AXLGLWAPI bool _ARB_robustness_share_group_isolation;
+AXLGLWAPI bool WGL_ARB_robustness_share_group_isolation;
 
 // WGL_3DFX_multisample
 constexpr long WGL_SAMPLE_BUFFERS_3DFX = 0x2060;

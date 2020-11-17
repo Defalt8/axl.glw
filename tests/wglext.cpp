@@ -11,15 +11,14 @@ int main(int argc, char *argv[])
 {
 	bool verbose = argc > 1 && (0 == strcmp(argv[1], "-v") || 0 == strcmp(argv[1], "--verbose"));
 	using namespace axl;
-	using namespace axl::glw;
+	// using namespace axl::glw;
 	using namespace axl::glw::wglext;
-	printf("axl.glw - version %u.%u.%u  %s %s\n", lib::version.major, lib::version.minor, lib::version.patch, LIB_TYPE, DEBUG_REL);
+	printf("axl.glw - version %u.%u.%u  %s %s\n", glw::lib::version.major, glw::lib::version.minor, glw::lib::version.patch, LIB_TYPE, DEBUG_REL);
 	if(verbose) puts("----------------------------------------");
-	atexit(wglext::cleanup);
+	atexit(cleanup);
 	IError error;
-	Assertv((error = wglext::init(false)) == IERR_NO_CONTEXT, verbose);
-	Assertv((error = wglext::init(true)) == IERR_NONE, verbose);
-	Assertv(error == IERR_NONE, verbose);
+	Assertv((error = init(false)) == IERR_NO_CONTEXT, verbose);
+	Assertv((error = init(true)) == IERR_NONE, verbose);
 	testFunctions(verbose);
 	puts("----------------------------------------");
 	printf("# %d Failed!\n", Assert::_num_failed_tests);
@@ -30,8 +29,8 @@ void testFunctions(bool verbose)
 {
 	using namespace axl::glw::wglext;
 	// WGL_ARB_buffer_region
-	if(verbose) printf("_ARB_buffer_region: %hhd\n", _ARB_buffer_region);
-	if(_ARB_buffer_region)
+	if(verbose) printf("WGL_ARB_buffer_region: %hhd\n", WGL_ARB_buffer_region);
+	if(WGL_ARB_buffer_region)
 	{
 		Assertv(wglCreateBufferRegionARB, verbose);
 		Assertv(wglDeleteBufferRegionARB, verbose);
@@ -39,39 +38,39 @@ void testFunctions(bool verbose)
 		Assertv(wglRestoreBufferRegionARB, verbose);
 	}
 	// WGL_ARB_context_flush_control
-	if(verbose) printf("_ARB_context_flush_control: %hhd\n", _ARB_context_flush_control);
+	if(verbose) printf("WGL_ARB_context_flush_control: %hhd\n", WGL_ARB_context_flush_control);
 	// WGL_ARB_create_context
-	if(verbose) printf("_ARB_create_context: %hhd\n", _ARB_create_context);
-	if(_ARB_create_context)
+	if(verbose) printf("WGL_ARB_create_context: %hhd\n", WGL_ARB_create_context);
+	if(WGL_ARB_create_context)
 	{
 		Assertv(wglCreateContextAttribsARB, verbose);
 	}
 	// WGL_ARB_create_context_no_error
-	if(verbose) printf("_ARB_create_context_no_error: %hhd\n", _ARB_create_context_no_error);
+	if(verbose) printf("WGL_ARB_create_context_no_error: %hhd\n", WGL_ARB_create_context_no_error);
 	// WGL_ARB_create_context_profile
-	if(verbose) printf("_ARB_create_context_profile: %hhd\n", _ARB_create_context_profile);
+	if(verbose) printf("WGL_ARB_create_context_profile: %hhd\n", WGL_ARB_create_context_profile);
 	// WGL_ARB_create_context_robustness
-	if(verbose) printf("_ARB_create_context_robustness: %hhd\n", _ARB_create_context_robustness);
+	if(verbose) printf("WGL_ARB_create_context_robustness: %hhd\n", WGL_ARB_create_context_robustness);
 	// WGL_ARB_extensions_string
-	if(verbose) printf("_ARB_extensions_string: %hhd\n", _ARB_extensions_string);
-	if(_ARB_create_context)
+	if(verbose) printf("WGL_ARB_extensions_string: %hhd\n", WGL_ARB_extensions_string);
+	if(WGL_ARB_create_context)
 	{
 		Assertv(wglGetExtensionsStringARB, verbose);
 	}
 	// WGL_ARB_framebuffer_sRGB
-	if(verbose) printf("_ARB_framebuffer_sRGB: %hhd\n", _ARB_framebuffer_sRGB);
+	if(verbose) printf("WGL_ARB_framebuffer_sRGB: %hhd\n", WGL_ARB_framebuffer_sRGB);
 	// WGL_ARB_make_current_read
-	if(verbose) printf("_ARB_make_current_read: %hhd\n", _ARB_make_current_read);
-	if(_ARB_make_current_read)
+	if(verbose) printf("WGL_ARB_make_current_read: %hhd\n", WGL_ARB_make_current_read);
+	if(WGL_ARB_make_current_read)
 	{
 		Assertv(wglMakeContextCurrentARB, verbose);
 		Assertv(wglGetCurrentReadDCARB, verbose);
 	}
 	// WGL_ARB_multisample
-	if(verbose) printf("_ARB_multisample: %hhd\n", _ARB_multisample);
+	if(verbose) printf("WGL_ARB_multisample: %hhd\n", WGL_ARB_multisample);
 	// WGL_ARB_pbuffer
-	if(verbose) printf("_ARB_pbuffer: %hhd\n", _ARB_pbuffer);
-	if(_ARB_pbuffer)
+	if(verbose) printf("WGL_ARB_pbuffer: %hhd\n", WGL_ARB_pbuffer);
+	if(WGL_ARB_pbuffer)
 	{
 		Assertv(wglCreatePbufferARB, verbose);
 		Assertv(wglGetPbufferDCARB, verbose);
@@ -80,27 +79,27 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryPbufferARB, verbose);
 	}
 	// WGL_ARB_pixel_format
-	if(verbose) printf("_ARB_pixel_format: %hhd\n", _ARB_pixel_format);
-	if(_ARB_pixel_format)
+	if(verbose) printf("WGL_ARB_pixel_format: %hhd\n", WGL_ARB_pixel_format);
+	if(WGL_ARB_pixel_format)
 	{
 		Assertv(wglGetPixelFormatAttribivARB, verbose);
 		Assertv(wglGetPixelFormatAttribfvARB, verbose);
 		Assertv(wglChoosePixelFormatARB, verbose);
 	}
 	// WGL_ARB_pixel_format_float
-	if(verbose) printf("_ARB_pixel_format_float: %hhd\n", _ARB_pixel_format_float);
+	if(verbose) printf("WGL_ARB_pixel_format_float: %hhd\n", WGL_ARB_pixel_format_float);
 	// WGL_ARB_render_texture
-	if(verbose) printf("_ARB_render_texture: %hhd\n", _ARB_render_texture);
-	if(_ARB_render_texture)
+	if(verbose) printf("WGL_ARB_render_texture: %hhd\n", WGL_ARB_render_texture);
+	if(WGL_ARB_render_texture)
 	{
 		Assertv(wglBindTexImageARB, verbose);
 		Assertv(wglReleaseTexImageARB, verbose);
 		Assertv(wglSetPbufferAttribARB, verbose);
 	}
 	// WGL_ARB_robustness_application_isolation
-	if(verbose) printf("_ARB_robustness_application_isolation: %hhd\n", _ARB_robustness_application_isolation);
+	if(verbose) printf("WGL_ARB_robustness_application_isolation: %hhd\n", WGL_ARB_robustness_application_isolation);
 	// WGL_ARB_robustness_share_group_isolation
-	if(verbose) printf("_ARB_robustness_share_group_isolation: %hhd\n", _ARB_robustness_share_group_isolation);
+	if(verbose) printf("WGL_ARB_robustness_share_group_isolation: %hhd\n", WGL_ARB_robustness_share_group_isolation);
 	// WGL_3DFX_multisample
 	if(verbose) printf("_3DFX_multisample: %hhd\n",_3DFX_multisample);
 	// WGL_3DL_stereo_control
@@ -151,7 +150,7 @@ void testFunctions(bool verbose)
 		Assertv(wglGetExtensionsStringEXT, verbose);
 	}
 	// WGL_EXT_framebuffer_sRGB
-	if(verbose) printf("_ARB_context_flush_control: %hhd\n",_EXT_framebuffer_sRGB);
+	if(verbose) printf("WGL_ARB_context_flush_control: %hhd\n",_EXT_framebuffer_sRGB);
 	// WGL_EXT_make_current_read
 	if(verbose) printf("_EXT_make_current_read: %hhd\n",_EXT_make_current_read);
 	if(_EXT_make_current_read)
@@ -251,8 +250,8 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryFrameTrackingI3D, verbose);
 	}
 	// WGL_NV_DX_interop
-	if(_ARB_context_flush_control) printf("_ARB_context_flush_control: %hhd\n", _ARB_context_flush_control);
-	if(_ARB_context_flush_control)
+	if(WGL_ARB_context_flush_control) printf("WGL_ARB_context_flush_control: %hhd\n", WGL_ARB_context_flush_control);
+	if(WGL_ARB_context_flush_control)
 	{
 		Assertv(wglDXSetResourceShareHandleNV, verbose);
 		Assertv(wglDXOpenDeviceNV, verbose);

@@ -27,6 +27,9 @@
 #		define AXLGLWCXXAPI
 #	endif
 #else
+#	ifndef AXLGLW_STATIC
+#		define AXLGLW_STATIC
+#	endif
 #	define AXLGLWAPI extern
 #	define AXLGLWCXXAPI
 #endif
@@ -34,6 +37,13 @@
 namespace axl {
 namespace glw {
 namespace lib {
+
+enum LibraryType {
+	LT_STATIC,
+	LT_SHARED,
+	LT_MODULE
+};
+typedef enum LibraryType LibraryType;
 
 struct Version
 {
@@ -43,7 +53,9 @@ struct Version
 };
 typedef struct Version Version;
 
-AXLGLWAPI Version version;
+AXLGLWAPI const Version version;
+AXLGLWAPI const LibraryType type;
+AXLGLWAPI const bool debug;
 
 } // namespace axl.glw.lib	
 } // namespace axl.glw	

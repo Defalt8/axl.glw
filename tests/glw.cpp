@@ -421,35 +421,35 @@ int main(int argc, char *argv[])
 			Assertv(glSpecializeShader , verbose);
 		}
 		// glext
-		if(verbose) printf("GL_arb_arrays_of_arrays: %hhd\n", arb_arrays_of_arrays);
-		if(verbose) printf("GL_arb_base_instance: %hhd\n", arb_base_instance);
-		if(arb_base_instance)
+		if(verbose) printf("GL_arb_arrays_of_arrays: %hhd\n", GL_ARB_arrays_of_arrays);
+		if(verbose) printf("GL_arb_base_instance: %hhd\n", GL_ARB_base_instance);
+		if(GL_ARB_base_instance)
 		{
 			Assertv(glDrawArraysInstancedBaseInstance , verbose);
 			Assertv(glDrawElementsInstancedBaseInstance , verbose);
 			Assertv(glDrawElementsInstancedBaseVertexBaseInstance , verbose);
 		}
-		if(verbose) printf("GL_arb_blend_func_extended: %hhd\n", arb_blend_func_extended);
-		if(arb_blend_func_extended)
+		if(verbose) printf("GL_arb_blend_func_extended: %hhd\n", GL_ARB_blend_func_extended);
+		if(GL_ARB_blend_func_extended)
 		{	
 			Assertv(glBindFragDataLocationIndexed , verbose);
 			Assertv(glGetFragDataIndex , verbose);
 		}
-		if(verbose) printf("GL_arb_buffer_storage: %hhd\n", arb_buffer_storage);
-		if(arb_buffer_storage)
+		if(verbose) printf("GL_arb_buffer_storage: %hhd\n", GL_ARB_buffer_storage);
+		if(GL_ARB_buffer_storage)
 		{	
 			Assertv(glBufferStorage , verbose);
 		}
-		if(verbose) printf("GL_arb_clear_buffer_object: %hhd\n", arb_clear_buffer_object);
-		if(arb_clear_buffer_object)
+		if(verbose) printf("GL_arb_clear_buffer_object: %hhd\n", GL_ARB_clear_buffer_object);
+		if(GL_ARB_clear_buffer_object)
 		{	
 			Assertv(glClearBufferData , verbose);
 			Assertv(glClearBufferSubData , verbose);
 			Assertv(glClearNamedBufferDataEXT , verbose);
 			Assertv(glClearNamedBufferSubDataEXT , verbose);
 		}
-		if(verbose) printf("GL_arb_ES2_compatibility: %hhd\n", arb_ES2_compatibility);
-		if(arb_ES2_compatibility)
+		if(verbose) printf("GL_arb_ES2_compatibility: %hhd\n", GL_ARB_ES2_compatibility);
+		if(GL_ARB_ES2_compatibility)
 		{	
 			Assertv(glClearDepthf , verbose);
 			Assertv(glDepthRangef , verbose);
@@ -457,19 +457,19 @@ int main(int argc, char *argv[])
 			Assertv(glReleaseShaderCompiler , verbose);
 			Assertv(glShaderBinary , verbose);
 		}
-		if(verbose) printf("GL_arb_ES3_compatibility: %hhd\n", arb_ES3_compatibility);
-		if(verbose) printf("GL_arb_ES3_1_compatibility: %hhd\n", arb_ES3_1_compatibility);
-		if(arb_ES3_1_compatibility)
+		if(verbose) printf("GL_arb_ES3_compatibility: %hhd\n", GL_ARB_ES3_compatibility);
+		if(verbose) printf("GL_arb_ES3_1_compatibility: %hhd\n", GL_ARB_ES3_1_compatibility);
+		if(GL_ARB_ES3_1_compatibility)
 		{	
 			Assertv(glMemoryBarrierByRegion , verbose);
 		}
-		if(verbose) printf("GL_arb_ES3_2_compatibility: %hhd\n", arb_ES3_2_compatibility);
-		if(arb_ES3_2_compatibility)
+		if(verbose) printf("GL_arb_ES3_2_compatibility: %hhd\n", GL_ARB_ES3_2_compatibility);
+		if(GL_ARB_ES3_2_compatibility)
 		{	
 			Assertv(glPrimitiveBoundingBoxARB , verbose);
 		}
-		if(verbose) printf("GL_arb_imaging: %hhd\n", arb_imaging);
-		if(arb_imaging)
+		if(verbose) printf("GL_arb_imaging: %hhd\n", GL_ARB_imaging);
+		if(GL_ARB_imaging)
 		{	
 			Assertv(glColorSubTable , verbose);
 			Assertv(glColorTable , verbose);
@@ -504,8 +504,8 @@ int main(int argc, char *argv[])
 			Assertv(glResetMinmax , verbose);
 			Assertv(glSeparableFilter2D , verbose);
 		}
-		if(verbose) printf("GL_arb_sync: %hhd\n", arb_sync);
-		if(arb_sync)
+		if(verbose) printf("GL_arb_sync: %hhd\n", GL_ARB_sync);
+		if(GL_ARB_sync)
 		{	
 			Assertv(glClientWaitSync , verbose);
 			Assertv(glDeleteSync , verbose);
@@ -515,8 +515,8 @@ int main(int argc, char *argv[])
 			Assertv(glIsSync , verbose);
 			Assertv(glWaitSync , verbose);
 		}
-		if(verbose) printf("GL_arb_tessellation_shader: %hhd\n", arb_tessellation_shader);
-		if(arb_tessellation_shader)
+		if(verbose) printf("GL_arb_tessellation_shader: %hhd\n", GL_ARB_tessellation_shader);
+		if(GL_ARB_tessellation_shader)
 		{	
 			Assertv(glPatchParameterfv , verbose);
 			Assertv(glPatchParameteri , verbose);

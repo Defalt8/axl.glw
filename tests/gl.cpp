@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
 	using namespace axl::glw;
 	using namespace axl::glw::gl;
 	using namespace axl::glw::gl2;
-	using namespace axl::glw::gl3;atexit(glw::cleanup);
+	using namespace axl::glw::gl3;
+	atexit(glw::cleanup);
 	if(argc == 2)
 	{
 		if(0 == strcmp(argv[1], "-h") || 0 == strcmp(argv[1], "--help"))
