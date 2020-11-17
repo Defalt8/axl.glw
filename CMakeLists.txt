@@ -4,29 +4,28 @@ project( axl.glw )
 
 # Configure
 option( BUILD_TESTS OFF )
-if( "${LIBRARY_TYPE}" STREQUAL "" )
-	set( LIBRARY_TYPE "STATIC" )
+if( "${LIB_TYPE}" STREQUAL "" )
+	set( LIB_TYPE "STATIC" )
 endif()
 if( "${CMAKE_BUILD_TYPE}" STREQUAL "" )
 	set( CMAKE_BUILD_TYPE "Debug" )
 endif()
 
 # Configure library type
-if( "${LIBRARY_TYPE}" STREQUAL "MODULE" )
-	set( LIB_TYPE MODULE )
-	set( AXLGLW_LIB_TYPE "AXLGLW_MODULE" )
-elseif( "${LIBRARY_TYPE}" STREQUAL "SHARED" )
-	set( LIB_TYPE SHARED )
-	set( AXLGLW_LIB_TYPE "AXLGLW_SHARED" )
+set( LIB_SUFFIX "" )
+if( "${LIB_TYPE}" STREQUAL "MODULE" )
+# ---
+elseif( "${LIB_TYPE}" STREQUAL "SHARED" )
+	set( LIB_SUFFIX ${LIB_SUFFIX}r )
 else()
 	set( LIB_TYPE STATIC )
-	set( AXLGLW_LIB_TYPE "AXLGLW_STATIC" )
+	set( LIB_SUFFIX ${LIB_SUFFIX}s )
 endif()
-set( LIBRARY_TYPE ${LIB_TYPE} )
 
 # Configure build type
 if( "${CMAKE_BUILD_TYPE}" STREQUAL "Debug" )
 	add_compile_definitions( DEBUG )
+	set( LIB_SUFFIX ${LIB_SUFFIX}d )
 	if( ${MSVC} )
 		add_compile_options( /DEBUG /Od )
 	else()
@@ -56,7 +55,7 @@ set( CMAKE_CXX_STANDARD 11 )
 
 # Print configurations
 message( "Project: ${PROJECT_NAME}" )
-message( "LIBRARY_TYPE= ${LIBRARY_TYPE}" )
+message( "LIB_TYPE= ${LIB_TYPE}" )
 message( "CMAKE_BUILD_TYPE= ${CMAKE_BUILD_TYPE}" )
 message( "CMAKE_CXX_STANDARD= ${CMAKE_CXX_STANDARD}" )
 message( "CMAKE_INSTALL_PREFIX= ${CMAKE_INSTALL_PREFIX}" )

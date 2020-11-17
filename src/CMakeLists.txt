@@ -19,23 +19,15 @@ else()
 endif()
 target_link_libraries( axl.glw ${LIBGDI32} ${LIBOPENGL32} )
 # Target compile definitions
-target_compile_definitions( axl.glw PUBLIC "${AXLGLW_LIB_TYPE}" )
-target_compile_definitions( axl.glw PRIVATE "AXLGLW_BUILD" )
+target_compile_definitions( axl.glw PUBLIC AXLGLW_${LIB_TYPE} )
+target_compile_definitions( axl.glw PRIVATE AXLGLW_BUILD )
 # Target properties
 set_target_properties( axl.glw PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/tests"
 	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/tests"
 )
-if( "${CMAKE_BUILD_TYPE}" STREQUAL "Debug" )
-	set_target_properties( axl.glw PROPERTIES
-		ARCHIVE_OUTPUT_NAME axl.glwd
-		LIBRARY_OUTPUT_NAME axl.glwd
-		RUNTIME_OUTPUT_NAME axl.glwrd
-	)
-else()
-	set_target_properties( axl.glw PROPERTIES
-		ARCHIVE_OUTPUT_NAME axl.glw
-		LIBRARY_OUTPUT_NAME axl.glw
-		RUNTIME_OUTPUT_NAME axl.glwr
-	)
-endif()
+set_target_properties( axl.glw PROPERTIES
+	ARCHIVE_OUTPUT_NAME axl.glw${LIB_SUFFIX}
+	RUNTIME_OUTPUT_NAME axl.glw${LIB_SUFFIX}
+	LIBRARY_OUTPUT_NAME axl.glw${LIB_SUFFIX}
+)
