@@ -1,7 +1,7 @@
 cmake_minimum_required( VERSION 3.17 )
 
 # Library
-add_library( axl.glw ${LIB_TYPE}
+add_library( axl.glw ${LIBRARY_TYPE}
 	"lib.cpp"
 	"Dummy.cpp"
 	"glw.cpp"
@@ -19,8 +19,15 @@ else()
 endif()
 target_link_libraries( axl.glw ${LIBGDI32} ${LIBOPENGL32} )
 # Target compile definitions
-target_compile_definitions( axl.glw PUBLIC AXLGLW_${LIB_TYPE} )
-target_compile_definitions( axl.glw PRIVATE AXLGLW_BUILD )
+target_compile_definitions( axl.glw
+	PUBLIC AXLGLW_${LIBRARY_TYPE}
+)
+target_compile_definitions( axl.glw
+	PRIVATE AXLGLW_BUILD
+	PRIVATE AXLGLW_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
+	PRIVATE AXLGLW_VERSION_MINOR=${PROJECT_VERSION_MINOR}
+	PRIVATE AXLGLW_VERSION_PATCH=${PROJECT_VERSION_PATCH}
+)
 # Target properties
 set_target_properties( axl.glw PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/tests"
