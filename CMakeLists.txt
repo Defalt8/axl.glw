@@ -8,6 +8,7 @@ set( INSTALL_INCLUDE_DIR include CACHE PATH "Include headers' relative install d
 set( INSTALL_LIBRARY_DIR lib CACHE PATH "Library archives' relative install directory")
 set( INSTALL_BINARY_DIR bin CACHE PATH "Binaries' relative install directory")
 set( CMAKE_CXX_STANDARD 11 CACHE STRING "Compilation standard")
+option( BUILD_TOOLS OFF )
 option( BUILD_TESTS OFF )
 
 # Configure library type
@@ -38,11 +39,15 @@ message( "INSTALL_INCLUDE_DIR= ${INSTALL_INCLUDE_DIR}" )
 message( "INSTALL_LIBRARY_DIR= ${INSTALL_LIBRARY_DIR}" )
 message( "INSTALL_BINARY_DIR= ${INSTALL_BINARY_DIR}" )
 message( "CMAKE_CXX_STANDARD= ${CMAKE_CXX_STANDARD}" )
+message( "BUILD_TOOLS= ${BUILD_TOOLS}" )
 message( "BUILD_TESTS= ${BUILD_TESTS}" )
 message( "------------------------------------------" )
 
 include_directories( include )
 add_subdirectory( src )
+if( ${BUILD_TOOLS} )
+	add_subdirectory( tools )
+endif()
 if( ${BUILD_TESTS} )
 	add_subdirectory( tests )
 endif()
