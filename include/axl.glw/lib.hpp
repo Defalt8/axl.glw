@@ -45,17 +45,24 @@ enum LibraryType {
 };
 typedef enum LibraryType LibraryType;
 
+enum BuildType {
+	BT_DEBUG,
+	BT_RELEASE,
+	BT_OTHER
+};
+typedef enum BuildType BuildType;
+
 struct Version
 {
-	short major;
-	short minor;
-	short patch;
+	unsigned short major;
+	unsigned short minor;
+	unsigned short patch;
 };
 typedef struct Version Version;
 
-AXLGLWAPI const Version version;
-AXLGLWAPI const LibraryType type;
-AXLGLWAPI const bool debug;
+AXLGLWAPI const Version VERSION;
+AXLGLWAPI const LibraryType LIBRARY_TYPE;
+AXLGLWAPI const BuildType BUILD_TYPE;
 
 } // namespace axl.glw.lib	
 } // namespace axl.glw	

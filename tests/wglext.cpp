@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	using namespace axl;
 	// using namespace axl::glw;
 	using namespace axl::glw::wglext;
-	printf("axl.glw - version %u.%u.%u  %s %s\n", glw::lib::version.major, glw::lib::version.minor, glw::lib::version.patch, LIB_TYPE, DEBUG_REL);
+	printf("axl.glw - version %u.%u.%u  %s %s\n", axl::glw::lib::VERSION.major, axl::glw::lib::VERSION.minor, axl::glw::lib::VERSION.patch, cstrLibType(axl::glw::lib::LIBRARY_TYPE), cstrBuildType(axl::glw::lib::BUILD_TYPE));
 	if(verbose) puts("----------------------------------------");
 	atexit(cleanup);
 	IError error;
@@ -101,16 +101,16 @@ void testFunctions(bool verbose)
 	// WGL_ARB_robustness_share_group_isolation
 	if(verbose) printf("WGL_ARB_robustness_share_group_isolation: %hhd\n", WGL_ARB_robustness_share_group_isolation);
 	// WGL_3DFX_multisample
-	if(verbose) printf("_3DFX_multisample: %hhd\n",_3DFX_multisample);
+	if(verbose) printf("WGL_3DFX_multisample: %hhd\n",WGL_3DFX_multisample);
 	// WGL_3DL_stereo_control
-	if(verbose) printf("_3DL_stereo_control: %hhd\n",_3DL_stereo_control);
-	if(_3DL_stereo_control) 
+	if(verbose) printf("WGL_3DL_stereo_control: %hhd\n",WGL_3DL_stereo_control);
+	if(WGL_3DL_stereo_control) 
 	{
 		Assertv(wglSetStereoEmitterState3DL, verbose);
 	}
 	// WGL_AMD_gpu_association
-	if(verbose) printf("_AMD_gpu_association: %hhd\n",_AMD_gpu_association);
-	if(_AMD_gpu_association)
+	if(verbose) printf("WGL_AMD_gpu_association: %hhd\n",WGL_AMD_gpu_association);
+	if(WGL_AMD_gpu_association)
 	{
 		Assertv(wglGetGPUIDsAMD, verbose);
 		Assertv(wglGetGPUInfoAMD, verbose);
@@ -123,20 +123,20 @@ void testFunctions(bool verbose)
 		Assertv(wglBlitContextFramebufferAMD, verbose);
 	}
 	// WGL_ATI_pixel_format_float
-	if(verbose) printf("_ATI_pixel_format_float: %hhd\n",_ATI_pixel_format_float);
+	if(verbose) printf("WGL_ATI_pixel_format_float: %hhd\n",WGL_ATI_pixel_format_float);
 	// WGL_ATI_render_texture_rectangle
-	if(verbose) printf("_ATI_render_texture_rectangle: %hhd\n",_ATI_render_texture_rectangle);
+	if(verbose) printf("WGL_ATI_render_texture_rectangle: %hhd\n",WGL_ATI_render_texture_rectangle);
 	// WGL_EXT_colorspace
-	if(verbose) printf("_EXT_colorspace: %hhd\n",_EXT_colorspace);
+	if(verbose) printf("WGL_EXT_colorspace: %hhd\n",WGL_EXT_colorspace);
 	// WGL_EXT_create_context_es2_profile
-	if(verbose) printf("_EXT_create_context_es2_profile: %hhd\n",_EXT_create_context_es2_profile);
+	if(verbose) printf("WGL_EXT_create_context_es2_profile: %hhd\n",WGL_EXT_create_context_es2_profile);
 	// WGL_EXT_create_context_es_profile
-	if(verbose) printf("_EXT_create_context_es_profile: %hhd\n",_EXT_create_context_es_profile);
+	if(verbose) printf("WGL_EXT_create_context_es_profile: %hhd\n",WGL_EXT_create_context_es_profile);
 	// WGL_EXT_depth_float
-	if(verbose) printf("_EXT_depth_float: %hhd\n",_EXT_depth_float);
+	if(verbose) printf("WGL_EXT_depth_float: %hhd\n",WGL_EXT_depth_float);
 	// WGL_EXT_display_color_table
-	if(verbose) printf("_EXT_display_color_table: %hhd\n",_EXT_display_color_table);
-	if(_EXT_display_color_table)
+	if(verbose) printf("WGL_EXT_display_color_table: %hhd\n",WGL_EXT_display_color_table);
+	if(WGL_EXT_display_color_table)
 	{
 		Assertv(wglCreateDisplayColorTableEXT, verbose);
 		Assertv(wglLoadDisplayColorTableEXT, verbose);
@@ -144,25 +144,25 @@ void testFunctions(bool verbose)
 		Assertv(wglDestroyDisplayColorTableEXT, verbose);
 	}
 	// WGL_EXT_extensions_string
-	if(verbose) printf("_EXT_extensions_string: %hhd\n",_EXT_extensions_string);
-	if(_EXT_extensions_string)
+	if(verbose) printf("WGL_EXT_extensions_string: %hhd\n",WGL_EXT_extensions_string);
+	if(WGL_EXT_extensions_string)
 	{
 		Assertv(wglGetExtensionsStringEXT, verbose);
 	}
 	// WGL_EXT_framebuffer_sRGB
-	if(verbose) printf("WGL_ARB_context_flush_control: %hhd\n",_EXT_framebuffer_sRGB);
+	if(verbose) printf("WGL_EXT_framebuffer_sRGB: %hhd\n",WGL_EXT_framebuffer_sRGB);
 	// WGL_EXT_make_current_read
-	if(verbose) printf("_EXT_make_current_read: %hhd\n",_EXT_make_current_read);
-	if(_EXT_make_current_read)
+	if(verbose) printf("WGL_EXT_make_current_read: %hhd\n",WGL_EXT_make_current_read);
+	if(WGL_EXT_make_current_read)
 	{
 		Assertv(wglMakeContextCurrentEXT, verbose);
 		Assertv(wglGetCurrentReadDCEXT, verbose);
 	}
 	// WGL_EXT_multisample
-	if(verbose) printf("_EXT_multisample: %hhd\n",_EXT_multisample);
+	if(verbose) printf("WGL_EXT_multisample: %hhd\n",WGL_EXT_multisample);
 	// WGL_EXT_pbuffer
-	if(verbose) printf("_EXT_pbuffer: %hhd\n",_EXT_pbuffer);
-	if(_EXT_pbuffer)
+	if(verbose) printf("WGL_EXT_pbuffer: %hhd\n",WGL_EXT_pbuffer);
+	if(WGL_EXT_pbuffer)
 	{
 		Assertv(wglCreatePbufferEXT, verbose);
 		Assertv(wglGetPbufferDCEXT, verbose);
@@ -171,34 +171,34 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryPbufferEXT, verbose);
 	}
 	// WGL_EXT_pixel_format
-	if(verbose) printf("_EXT_pixel_format: %hhd\n",_EXT_pixel_format);
-	if(_EXT_pixel_format)
+	if(verbose) printf("WGL_EXT_pixel_format: %hhd\n",WGL_EXT_pixel_format);
+	if(WGL_EXT_pixel_format)
 	{
 		Assertv(wglGetPixelFormatAttribivEXT, verbose);
 		Assertv(wglGetPixelFormatAttribfvEXT, verbose);
 		Assertv(wglChoosePixelFormatEXT, verbose);
 	}
 	// WGL_EXT_pixel_format_packed_float
-	if(verbose) printf("_EXT_pixel_format_packed_float: %hhd\n",_EXT_pixel_format_packed_float);
+	if(verbose) printf("WGL_EXT_pixel_format_packed_float: %hhd\n",WGL_EXT_pixel_format_packed_float);
 	// WGL_EXT_swap_control
-	if(verbose) printf("_EXT_swap_control: %hhd\n",_EXT_swap_control);
-	if(_EXT_swap_control)
+	if(verbose) printf("WGL_EXT_swap_control: %hhd\n",WGL_EXT_swap_control);
+	if(WGL_EXT_swap_control)
 	{
 		Assertv(wglSwapIntervalEXT, verbose);
 		Assertv(wglGetSwapIntervalEXT, verbose);
 	}
 	// WGL_EXT_swap_control_tear
-	if(verbose) printf("_EXT_swap_control_tear: %hhd\n",_EXT_swap_control_tear);
+	if(verbose) printf("WGL_EXT_swap_control_tear: %hhd\n",WGL_EXT_swap_control_tear);
 	// WGL_I3D_digital_video_control
-	if(verbose) printf("_I3D_digital_video_control: %hhd\n",_I3D_digital_video_control);
-	if(_I3D_digital_video_control)
+	if(verbose) printf("WGL_I3D_digital_video_control: %hhd\n",WGL_I3D_digital_video_control);
+	if(WGL_I3D_digital_video_control)
 	{
 		Assertv(wglGetDigitalVideoParametersI3D, verbose);
 		Assertv(wglSetDigitalVideoParametersI3D, verbose);
 	}
 	// WGL_I3D_gamma
-	if(verbose) printf("_I3D_gamma: %hhd\n",_I3D_gamma);
-	if(_I3D_gamma)
+	if(verbose) printf("WGL_I3D_gamma: %hhd\n",WGL_I3D_gamma);
+	if(WGL_I3D_gamma)
 	{
 		Assertv(wglGetGammaTableParametersI3D, verbose);
 		Assertv(wglSetGammaTableParametersI3D, verbose);
@@ -206,8 +206,8 @@ void testFunctions(bool verbose)
 		Assertv(wglSetGammaTableI3D, verbose);
 	}
 	// WGL_I3D_genlock
-	if(verbose) printf("_I3D_genlock: %hhd\n",_I3D_genlock);
-	if(_I3D_genlock)
+	if(verbose) printf("WGL_I3D_genlock: %hhd\n",WGL_I3D_genlock);
+	if(WGL_I3D_genlock)
 	{
 		Assertv(wglEnableGenlockI3D, verbose);
 		Assertv(wglDisableGenlockI3D, verbose);
@@ -223,8 +223,8 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryGenlockMaxSourceDelayI3D, verbose);
 	}
 	// WGL_I3D_image_buffer
-	if(verbose) printf("_I3D_image_buffer: %hhd\n",_I3D_image_buffer);
-	if(_I3D_image_buffer)
+	if(verbose) printf("WGL_I3D_image_buffer: %hhd\n",WGL_I3D_image_buffer);
+	if(WGL_I3D_image_buffer)
 	{
 		Assertv(wglCreateImageBufferI3D, verbose);
 		Assertv(wglDestroyImageBufferI3D, verbose);
@@ -232,8 +232,8 @@ void testFunctions(bool verbose)
 		Assertv(wglReleaseImageBufferEventsI3D, verbose);
 	}
 	// WGL_I3D_swap_frame_lock
-	if(verbose) printf("_I3D_swap_frame_lock: %hhd\n",_I3D_swap_frame_lock);
-	if(_I3D_swap_frame_lock)
+	if(verbose) printf("WGL_I3D_swap_frame_lock: %hhd\n",WGL_I3D_swap_frame_lock);
+	if(WGL_I3D_swap_frame_lock)
 	{
 		Assertv(wglEnableFrameLockI3D, verbose);
 		Assertv(wglDisableFrameLockI3D, verbose);
@@ -241,8 +241,8 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryFrameLockMasterI3D, verbose);
 	}
 	// WGL_I3D_swap_frame_usage
-	if(verbose) printf("_I3D_swap_frame_usage: %hhd\n",_I3D_swap_frame_usage);
-	if(_I3D_swap_frame_usage)
+	if(verbose) printf("WGL_I3D_swap_frame_usage: %hhd\n",WGL_I3D_swap_frame_usage);
+	if(WGL_I3D_swap_frame_usage)
 	{
 		Assertv(wglGetFrameUsageI3D, verbose);
 		Assertv(wglBeginFrameTrackingI3D, verbose);
@@ -250,7 +250,7 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryFrameTrackingI3D, verbose);
 	}
 	// WGL_NV_DX_interop
-	if(WGL_ARB_context_flush_control) printf("WGL_ARB_context_flush_control: %hhd\n", WGL_ARB_context_flush_control);
+	if(verbose) printf("WGL_ARB_context_flush_control: %hhd\n", WGL_ARB_context_flush_control);
 	if(WGL_ARB_context_flush_control)
 	{
 		Assertv(wglDXSetResourceShareHandleNV, verbose);
@@ -263,24 +263,24 @@ void testFunctions(bool verbose)
 		Assertv(wglDXUnlockObjectsNV, verbose);
 	}
 	// WGL_NV_DX_interop2
-	if(verbose) printf("_NV_DX_interop2: %hhd\n",_NV_DX_interop2);
+	if(verbose) printf("WGL_NV_DX_interop2: %hhd\n",WGL_NV_DX_interop2);
 	// WGL_NV_copy_image
-	if(verbose) printf("_NV_copy_image: %hhd\n",_NV_copy_image);
-	if(_NV_copy_image)
+	if(verbose) printf("WGL_NV_copy_image: %hhd\n",WGL_NV_copy_image);
+	if(WGL_NV_copy_image)
 	{
 		Assertv(wglCopyImageSubDataNV, verbose);
 	}
 	// WGL_NV_delay_before_swap
-	if(verbose) printf("_NV_delay_before_swap: %hhd\n",_NV_delay_before_swap);
-	if(_NV_delay_before_swap)
+	if(verbose) printf("WGL_NV_delay_before_swap: %hhd\n",WGL_NV_delay_before_swap);
+	if(WGL_NV_delay_before_swap)
 	{
 		Assertv(wglDelayBeforeSwapNV, verbose);
 	}
 	// WGL_NV_float_buffer
-	if(verbose) printf("_NV_float_buffer: %hhd\n",_NV_float_buffer);
+	if(verbose) printf("WGL_NV_float_buffer: %hhd\n",WGL_NV_float_buffer);
 	// WGL_NV_gpu_affinity
-	if(verbose) printf("_NV_gpu_affinity: %hhd\n",_NV_gpu_affinity);
-	if(_NV_gpu_affinity)
+	if(verbose) printf("WGL_NV_gpu_affinity: %hhd\n",WGL_NV_gpu_affinity);
+	if(WGL_NV_gpu_affinity)
 	{
 		Assertv(wglEnumGpusNV, verbose);
 		Assertv(wglEnumGpuDevicesNV, verbose);
@@ -289,24 +289,24 @@ void testFunctions(bool verbose)
 		Assertv(wglDeleteDCNV, verbose);
 	}
 	// WGL_NV_multigpu_context
-	if(verbose) printf("_NV_multigpu_context: %hhd\n",_NV_multigpu_context);
+	if(verbose) printf("WGL_NV_multigpu_context: %hhd\n",WGL_NV_multigpu_context);
 	// WGL_NV_multisample_coverage
-	if(verbose) printf("_NV_multisample_coverage: %hhd\n",_NV_multisample_coverage);
+	if(verbose) printf("WGL_NV_multisample_coverage: %hhd\n",WGL_NV_multisample_coverage);
 	// WGL_NV_present_video
-	if(verbose) printf("_NV_present_video: %hhd\n",_NV_present_video);
-	if(_NV_present_video)
+	if(verbose) printf("WGL_NV_present_video: %hhd\n",WGL_NV_present_video);
+	if(WGL_NV_present_video)
 	{
 		Assertv(wglEnumerateVideoDevicesNV, verbose);
 		Assertv(wglBindVideoDeviceNV, verbose);
 		Assertv(wglQueryCurrentContextNV, verbose);
 	}
 	// WGL_NV_render_depth_texture
-	if(verbose) printf("_NV_render_depth_texture: %hhd\n",_NV_render_depth_texture);
+	if(verbose) printf("WGL_NV_render_depth_texture: %hhd\n",WGL_NV_render_depth_texture);
 	// WGL_NV_render_texture_rectangle
-	if(verbose) printf("_NV_render_texture_rectangle: %hhd\n",_NV_render_texture_rectangle);
+	if(verbose) printf("WGL_NV_render_texture_rectangle: %hhd\n",WGL_NV_render_texture_rectangle);
 	// WGL_NV_swap_group
-	if(verbose) printf("_NV_swap_group: %hhd\n",_NV_swap_group);
-	if(_NV_swap_group)
+	if(verbose) printf("WGL_NV_swap_group: %hhd\n",WGL_NV_swap_group);
+	if(WGL_NV_swap_group)
 	{
 		Assertv(wglJoinSwapGroupNV, verbose);
 		Assertv(wglBindSwapBarrierNV, verbose);
@@ -316,15 +316,15 @@ void testFunctions(bool verbose)
 		Assertv(wglResetFrameCountNV, verbose);
 	}
 	// WGL_NV_vertex_array_range
-	if(verbose) printf("_NV_vertex_array_range: %hhd\n",_NV_vertex_array_range);
-	if(_NV_vertex_array_range)
+	if(verbose) printf("WGL_NV_vertex_array_range: %hhd\n",WGL_NV_vertex_array_range);
+	if(WGL_NV_vertex_array_range)
 	{
 		Assertv(wglAllocateMemoryNV, verbose);
 		Assertv(wglFreeMemoryNV, verbose);
 	}
 	// WGL_NV_video_capture
-	if(verbose) printf("_NV_video_capture: %hhd\n",_NV_video_capture);
-	if(_NV_video_capture)
+	if(verbose) printf("WGL_NV_video_capture: %hhd\n",WGL_NV_video_capture);
+	if(WGL_NV_video_capture)
 	{
 		Assertv(wglBindVideoCaptureDeviceNV, verbose);
 		Assertv(wglEnumerateVideoCaptureDevicesNV, verbose);
@@ -333,8 +333,8 @@ void testFunctions(bool verbose)
 		Assertv(wglReleaseVideoCaptureDeviceNV, verbose);
 	}
 	// WGL_NV_video_output
-	if(verbose) printf("_NV_video_output: %hhd\n",_NV_video_output);
-	if(_NV_video_output)
+	if(verbose) printf("WGL_NV_video_output: %hhd\n",WGL_NV_video_output);
+	if(WGL_NV_video_output)
 	{
 		Assertv(wglGetVideoDeviceNV, verbose);
 		Assertv(wglReleaseVideoDeviceNV, verbose);
@@ -344,8 +344,8 @@ void testFunctions(bool verbose)
 		Assertv(wglGetVideoInfoNV, verbose);
 	}
 	// WGL_OML_sync_control
-	if(verbose) printf("_OML_sync_control: %hhd\n",_OML_sync_control);
-	if(_OML_sync_control)
+	if(verbose) printf("WGL_OML_sync_control: %hhd\n",WGL_OML_sync_control);
+	if(WGL_OML_sync_control)
 	{
 		Assertv(wglGetSyncValuesOML, verbose);
 		Assertv(wglGetMscRateOML, verbose);

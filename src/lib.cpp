@@ -4,20 +4,22 @@ namespace axl {
 namespace glw {
 namespace lib {
 
-const Version version = { 0, 4, 8 };
+const Version VERSION = { AXLGLW_VERSION_MAJOR, AXLGLW_VERSION_MINOR, AXLGLW_VERSION_PATCH };
 
 #if defined(AXLGLW_MODULE)
-const LibraryType type = LT_MODULE;
+const LibraryType LIBRARY_TYPE = LT_MODULE;
 #elif defined(AXLGLW_SHARED)
-const LibraryType type = LT_SHARED;
+const LibraryType LIBRARY_TYPE = LT_SHARED;
 #else
-const LibraryType type = LT_STATIC;
+const LibraryType LIBRARY_TYPE = LT_STATIC;
 #endif
 
 #ifdef DEBUG
-const bool debug = true;
+const BuildType BUILD_TYPE = BT_DEBUG;
+#elif defined(NDEBUG)
+const BuildType BUILD_TYPE = BT_RELEASE;
 #else
-const bool debug = false;
+const BuildType BUILD_TYPE = BT_OTHER;
 #endif
 
 } // namespace axl.glw.lib	

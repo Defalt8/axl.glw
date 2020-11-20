@@ -1,4 +1,5 @@
 #pragma once
+#include "lib.hpp"
 #include "gl.hpp"
 
 namespace axl {

@@ -1,18 +1,26 @@
 #pragma once
 #include <axl.glw/lib.hpp>
 
-#if defined(DEBUG)
-#define DEBUG_REL "Debug"
-#else
-#define DEBUG_REL "Release"
-#endif
+const char* cstrLibType(axl::glw::lib::LibraryType lib_type)
+{
+	using namespace axl::glw::lib;
+	switch (lib_type)
+	{
+		case LT_MODULE: return "MODULE";
+		case LT_SHARED: return "SHARED";
+		default:
+		case LT_STATIC: return "STATIC";
+	}
+}
 
-#if defined(AXLGLW_MODULE)
-#define LIB_TYPE "MODULE"
-#elif defined(AXLGLW_SHARED)
-#define LIB_TYPE "SHARED"
-#elif defined(AXLGLW_STATIC)
-#define LIB_TYPE "STATIC"
-#else
-#define LIB_TYPE ""
-#endif
+const char* cstrBuildType(axl::glw::lib::BuildType build_type)
+{
+	using namespace axl::glw::lib;
+	switch (build_type)
+	{
+		case BT_DEBUG: return "Debug";
+		case BT_RELEASE: return "Release";
+		default:
+		case BT_OTHER: return "Other";
+	}
+}

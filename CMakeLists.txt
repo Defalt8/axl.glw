@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.17 )
 
-project( axl.glw VERSION 0.4.9 DESCRIPTION "A well organized C++ OpenGL wrangler library" )
+project( axl.glw VERSION 0.5.9 DESCRIPTION "A well organized C++ OpenGL wrangler library" )
 
 # Configure
 set( LIBRARY_TYPE STATIC CACHE STRING "Library type")

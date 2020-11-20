@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	using namespace axl::glw::gl2;
 	using namespace axl::glw::gl3;
 	using namespace axl::glw::gl4;
-	printf("axl.glw - version %u.%u.%u  %s %s\n", lib::version.major, lib::version.minor, lib::version.patch, LIB_TYPE, DEBUG_REL);
+	printf("axl.glw - version %u.%u.%u  %s %s\n", axl::glw::lib::VERSION.major, axl::glw::lib::VERSION.minor, axl::glw::lib::VERSION.patch, cstrLibType(axl::glw::lib::LIBRARY_TYPE), cstrBuildType(axl::glw::lib::BUILD_TYPE));
 	if(verbose) puts("----------------------------------------");
 	atexit(axl::glw::cleanup);
 	{
