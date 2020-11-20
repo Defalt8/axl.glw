@@ -1,7 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include "Assert.hpp"
 #include <axl.glw/lib.hpp>
 #include <axl.glw/glw.hpp>
 #include <axl.glw/gl.hpp>
@@ -20,15 +19,15 @@ int main(int argc, char *argv[])
 	{
 		if(0 == strcmp(argv[1], "-h") || 0 == strcmp(argv[1], "--help"))
 		{
-			printf(
-				"gl.exe -h|--help                      prints this help.\n"
-				"gl.exe -v|--version                   prints OpenGL version.\n"
-				"gl.exe -sv|--shader-version           prints OpenGL shader version, if present.\n"
-				"gl.exe -V|--vendor                    prints OpenGL hardware vendor.\n"
-				"gl.exe -e|--extensions                prints supported OpenGL extensions, space separated.\n"
-				"gl.exe -E|--Extensions                prints supported OpenGL extensions, new-line separated.\n"
-				"gl.exe -ne|--num-extensions           prints number of supported OpenGL extensions.\n"
-				"gl.exe -ce|--check-extension <ext>    prints 1 if the extension <ext> is supported else 0.\n"
+			printf( " gl -- An OpenGL info commandline tool.\n\n"
+				"    gl -h|--help                      prints this help.\n"
+				"    gl -v|--version                   prints OpenGL version.\n"
+				"    gl -sv|--shader-version           prints OpenGL shader version, if present.\n"
+				"    gl -V|--vendor                    prints OpenGL hardware vendor.\n"
+				"    gl -e|--extensions                prints supported OpenGL extensions, space separated.\n"
+				"    gl -E|--Extensions                prints supported OpenGL extensions, new-line separated.\n"
+				"    gl -ne|--num-extensions           prints number of supported OpenGL extensions.\n"
+				"    gl -ce|--check-extension <ext>    prints 1 if the extension <ext> is supported else 0.\n"
 			);
 		}
 		else if(0 == strcmp(argv[1], "-v") || 0 == strcmp(argv[1], "--version"))

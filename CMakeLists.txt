@@ -7,9 +7,14 @@ set( LIBRARY_TYPE STATIC CACHE STRING "Library type")
 set( INSTALL_INCLUDE_DIR include CACHE PATH "Include headers' relative install directory")
 set( INSTALL_LIBRARY_DIR lib CACHE PATH "Library archives' relative install directory")
 set( INSTALL_BINARY_DIR bin CACHE PATH "Binaries' relative install directory")
+set( INSTALL_TOOLS_DIR bin CACHE PATH "Tool binaries install directory")
 set( CMAKE_CXX_STANDARD 11 CACHE STRING "Compilation standard")
-option( BUILD_TOOLS OFF )
-option( BUILD_TESTS OFF )
+set( CMAKE_CXX_STANDARD_REQUIRED true )
+set( INSTALL_HEADERS ON CACHE BOOL "Install headers" )
+set( INSTALL_LIBRARY ON CACHE BOOL "Install library" )
+set( INSTALL_TOOLS OFF CACHE BOOL "Install tools" )
+set( BUILD_TOOLS OFF CACHE BOOL "Build tools" )
+set( BUILD_TESTS OFF CACHE BOOL "Build tests" )
 
 # Configure library type
 set( LIB_SUFFIX "" )
@@ -39,6 +44,9 @@ message( "INSTALL_INCLUDE_DIR= ${INSTALL_INCLUDE_DIR}" )
 message( "INSTALL_LIBRARY_DIR= ${INSTALL_LIBRARY_DIR}" )
 message( "INSTALL_BINARY_DIR= ${INSTALL_BINARY_DIR}" )
 message( "CMAKE_CXX_STANDARD= ${CMAKE_CXX_STANDARD}" )
+message( "INSTALL_HEADERS= ${INSTALL_HEADERS}" )
+message( "INSTALL_LIBRARY= ${INSTALL_LIBRARY}" )
+message( "INSTALL_TOOLS= ${INSTALL_TOOLS}" )
 message( "BUILD_TOOLS= ${BUILD_TOOLS}" )
 message( "BUILD_TESTS= ${BUILD_TESTS}" )
 message( "------------------------------------------" )
@@ -53,24 +61,28 @@ if( ${BUILD_TESTS} )
 endif()
 
 # Install
-install( FILES
-	"include/axl.glw/lib.hpp"
-	"include/axl.glw/platform.hpp"
-	"include/axl.glw/Dummy.hpp"
-	"include/axl.glw/glw.hpp"
-	"include/axl.glw/gl.hpp"
-	"include/axl.glw/glext.hpp"
-	"include/axl.glw/gl1.hpp"
-	"include/axl.glw/gl2.hpp"
-	"include/axl.glw/gl3.hpp"
-	"include/axl.glw/gl4.hpp"
-	"include/axl.glw/wglext.hpp"
-	DESTINATION "${INSTALL_INCLUDE_DIR}/axl.glw"
-)
-install( TARGETS
-	axl.glw
-	ARCHIVE DESTINATION "${INSTALL_LIBRARY_DIR}"
-	LIBRARY DESTINATION "${INSTALL_BINARY_DIR}"
-	RUNTIME DESTINATION "${INSTALL_BINARY_DIR}"
-	CONFIGURATIONS "" Debug Release
-)
+if( INSTALL_HEADERS )
+	install( FILES
+		"include/axl.glw/lib.hpp"
+		"include/axl.glw/platform.hpp"
+		"include/axl.glw/Dummy.hpp"
+		"include/axl.glw/glw.hpp"
+		"include/axl.glw/gl.hpp"
+		"include/axl.glw/glext.hpp"
+		"include/axl.glw/gl1.hpp"
+		"include/axl.glw/gl2.hpp"
+		"include/axl.glw/gl3.hpp"
+		"include/axl.glw/gl4.hpp"
+		"include/axl.glw/wglext.hpp"
+		DESTINATION "${INSTALL_INCLUDE_DIR}/axl.glw"
+	)
+endif()
+if( INSTALL_LIBRARY )
+	install( TARGETS
+		axl.glw
+		ARCHIVE DESTINATION "${INSTALL_LIBRARY_DIR}"
+		LIBRARY DESTINATION "${INSTALL_BINARY_DIR}"
+		RUNTIME DESTINATION "${INSTALL_BINARY_DIR}"
+		CONFIGURATIONS "" Debug Release
+	)
+endif()

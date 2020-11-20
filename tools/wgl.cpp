@@ -1,26 +1,22 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include "Assert.hpp"
 #include <axl.glw/lib.hpp>
 #include <axl.glw/wglext.hpp>
 
 int main(int argc, char *argv[])
 {
 	using namespace axl;
-	// using namespace axl::glw;
 	using namespace axl::glw::wglext;
 	atexit(cleanup);
 	if(argc == 2)
 	{
 		if(0 == strcmp(argv[1], "-h") || 0 == strcmp(argv[1], "--help"))
 		{
-			printf(
-				"wgl -h|--help                      prints this help.\n"
-				"wgl -e|--extensions                prints supported OpenGL extensions, space separated.\n"
-				// "wgl -E|--Extensions                prints supported OpenGL extensions, new-line separated.\n"
-				// "wgl -ne|--num-extensions           prints number of supported OpenGL extensions.\n"
-				"wgl -ce|--check-extension <ext>    prints 1 if the extension <ext> is supported else 0.\n"
+			printf(" wgl -- A windows OpenGL extension (WGL) info commandline tool.\n\n"
+				"    wgl -h|--help                      prints this help.\n"
+				"    wgl -e|--extensions                prints supported OpenGL extensions, space separated.\n"
+				"    wgl -ce|--check-extension <ext>    prints 1 if the extension <ext> is supported else 0.\n"
 			);
 		}
 		else if(0 == strcmp(argv[1], "-e") || 0 == strcmp(argv[1], "--extensions"))
