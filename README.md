@@ -4,13 +4,13 @@ A well organized C++ OpenGL wrangler library
 
 ## Latest version and supported platforms
 
-- Latest *version*: 0.5.9 *Alpha*
-- Supported *platforms*: **Windows**
+- Latest *version*: 0.6.14 *Alpha*
+- Currently Supported *platforms*: **Windows**
 
 ## Library Headers
 
 - *[axl.glw/lib.hpp](/include/axl.glw/lib.hpp)* -- The library header. Contains library version.
-- *[axl.glw/platform.hpp](/include/axl.glw/platform.hpp)* -- Declares platform and ABI.
+- *[axl.glw/platform.h](/include/axl.glw/platform.h)* -- Declares platform and ABI.
 - *[axl.glw/Dummy.hpp](/include/axl.glw/Dummy.hpp)* -- A class that creates an OpenGL dummy context and declares an external GlobalDummy object outside the class.
 - *[axl.glw/glw.hpp](/include/axl.glw/glw.hpp)* -- (**Main Header**). Declares functions and variables of the OpenGL function-loading library.
 - *[axl.glw/gl.hpp](/include/axl.glw/gl.hpp)* -- Declares all *OpenGL 1.0* constants and functions that do ***NOT*** require loading.

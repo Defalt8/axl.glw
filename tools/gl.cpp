@@ -33,15 +33,15 @@ int main(int argc, char *argv[])
 		else if(0 == strcmp(argv[1], "-v") || 0 == strcmp(argv[1], "--version"))
 		{
 			if(IERR_NONE != glw::init(true)) return 2;
-			if(glw::GL_MAJOR_VERSION > 0)
+			if(glw::MAJOR_GL_VERSION > 0)
 			{
-				printf("%d.%d\n", glw::GL_MAJOR_VERSION, glw::GL_MINOR_VERSION);
+				printf("%d.%d\n", glw::MAJOR_GL_VERSION, glw::MINOR_GL_VERSION);
 			}
-			else if(glw::GL_MAJOR_VERSION >= 3)
+			else if(glw::MAJOR_GL_VERSION >= 3)
 			{
 				GLint major_version, minor_version;
-				glGetIntegerv(glw::GL_MAJOR_VERSION, &major_version);
-				glGetIntegerv(glw::GL_MINOR_VERSION, &minor_version);
+				glGetIntegerv(glw::MAJOR_GL_VERSION, &major_version);
+				glGetIntegerv(glw::MINOR_GL_VERSION, &minor_version);
 				printf("%d.%d\n", major_version, minor_version);
 			}
 			else
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 		else if(0 == strcmp(argv[1], "-sv") || 0 == strcmp(argv[1], "--shader-version"))
 		{
 			if(IERR_NONE != glw::init(true)) return 2;
-			if(glw::GL_MAJOR_VERSION >= 3)
+			if(glw::MAJOR_GL_VERSION >= 3)
 			{
 				printf("%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 			}
@@ -80,17 +80,17 @@ int main(int argc, char *argv[])
 		else if(0 == strcmp(argv[1], "-ne") || 0 == strcmp(argv[1], "--num-extensions"))
 		{
 			if(IERR_NONE != glw::init(true)) return 2;
-			if(glw::GL_NUM_EXTENSIONS < 0) return 3;
-			printf("%d\n", glw::GL_NUM_EXTENSIONS);
+			if(glw::NUM_GL_EXTENSIONS < 0) return 3;
+			printf("%d\n", glw::NUM_GL_EXTENSIONS);
 		}
 		else if(0 == strcmp(argv[1], "-E") || 0 == strcmp(argv[1], "--Extensions"))
 		{
 			if(IERR_NONE != glw::init(true)) return 2;
-			if(glw::GL_NUM_EXTENSIONS <= 0) return 3;
-			if(glw::GL_MAJOR_VERSION >= 3)
+			if(glw::NUM_GL_EXTENSIONS <= 0) return 3;
+			if(glw::MAJOR_GL_VERSION >= 3)
 			{
 				const char* gl_extension;
-				for(int i=0; i<glw::GL_NUM_EXTENSIONS; ++i)
+				for(int i=0; i<glw::NUM_GL_EXTENSIONS; ++i)
 				{
 					gl_extension = (const char*)glGetStringi(GL_EXTENSIONS, i);
 					if(gl_extension) printf("%s\n", gl_extension);

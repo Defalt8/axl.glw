@@ -1,21 +1,8 @@
 #pragma once
 
-#if defined(AXLGLW_MODULE)
+#if defined(LIBAXLGLW_SHARED)
 #	ifdef WIN32
-#		ifdef AXLGLW_BUILD
-#			define AXLGLWAPI extern __declspec(dllexport)
-#			define AXLGLWCXXAPI __declspec(dllexport)
-#		else
-#			define AXLGLWAPI extern __declspec(dllimport)
-#			define AXLGLWCXXAPI __declspec(dllimport)
-#		endif
-#	else
-#		define AXLGLWAPI extern
-#		define AXLGLWCXXAPI
-#	endif
-#elif defined(AXLGLW_SHARED)
-#	ifdef WIN32
-#		ifdef AXLGLW_BUILD
+#		ifdef LIBAXLGLW_BUILD
 #			define AXLGLWAPI extern __declspec(dllexport)
 #			define AXLGLWCXXAPI __declspec(dllexport)
 #		else
@@ -27,9 +14,6 @@
 #		define AXLGLWCXXAPI
 #	endif
 #else
-#	ifndef AXLGLW_STATIC
-#		define AXLGLW_STATIC
-#	endif
 #	define AXLGLWAPI extern
 #	define AXLGLWCXXAPI
 #endif
@@ -40,8 +24,7 @@ namespace lib {
 
 enum LibraryType {
 	LT_STATIC,
-	LT_SHARED,
-	LT_MODULE
+	LT_SHARED
 };
 typedef enum LibraryType LibraryType;
 

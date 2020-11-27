@@ -6,7 +6,6 @@ const char* cstrLibType(axl::glw::lib::LibraryType lib_type)
 	using namespace axl::glw::lib;
 	switch (lib_type)
 	{
-		case LT_MODULE: return "MODULE";
 		case LT_SHARED: return "SHARED";
 		default:
 		case LT_STATIC: return "STATIC";

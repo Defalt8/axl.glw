@@ -4,11 +4,9 @@ namespace axl {
 namespace glw {
 namespace lib {
 
-const Version VERSION = { AXLGLW_VERSION_MAJOR, AXLGLW_VERSION_MINOR, AXLGLW_VERSION_PATCH };
+const Version VERSION = { LIBAXLGLW_VERSION_MAJOR, LIBAXLGLW_VERSION_MINOR, LIBAXLGLW_VERSION_PATCH };
 
-#if defined(AXLGLW_MODULE)
-const LibraryType LIBRARY_TYPE = LT_MODULE;
-#elif defined(AXLGLW_SHARED)
+#if defined(LIBAXLGLW_SHARED)
 const LibraryType LIBRARY_TYPE = LT_SHARED;
 #else
 const LibraryType LIBRARY_TYPE = LT_STATIC;

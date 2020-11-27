@@ -1,40 +1,70 @@
-cmake_minimum_required( VERSION 3.17 )
 
-# Library
-add_library( axl.glw ${LIBRARY_TYPE}
+# library
+set( LIBAXLGLW_OUTPUT_NAME axl.glw )
+add_library( axl.glw ${LIBAXLGLW_TYPE}
 	"lib.cpp"
+	"glProc.cpp"
 	"Dummy.cpp"
 	"glw.cpp"
 	"platext.cpp"
 )
-# Target link libraries
+# target link libraries
 if( ${MSVC} )
 	set( LIBGDI32 gdi32.lib )
 	set( LIBOPENGL32 opengl32.lib )
 elseif( ${WIN32} )
 	set( LIBGDI32 -lgdi32 )
 	set( LIBOPENGL32 -lopengl32 )
+elseif( UNIX AND NOT APPLE )
+	set( LIBOPENGL32 -lGL -lX11 )
 else()
 	set( LIBOPENGL32 -lopengl32 )
 endif()
 target_link_libraries( axl.glw ${LIBGDI32} ${LIBOPENGL32} )
-# Target compile definitions
+# target properties and definitions
 target_compile_definitions( axl.glw
-	PUBLIC AXLGLW_${LIBRARY_TYPE}
+	PRIVATE LIBAXLGLW_BUILD
+	PUBLIC LIBAXLGLW_VERSION_MAJOR=${axl.glw_VERSION_MAJOR}
+	PUBLIC LIBAXLGLW_VERSION_MINOR=${axl.glw_VERSION_MINOR}
+	PUBLIC LIBAXLGLW_VERSION_PATCH=${axl.glw_VERSION_PATCH}
 )
-target_compile_definitions( axl.glw
-	PRIVATE AXLGLW_BUILD
-	PRIVATE AXLGLW_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
-	PRIVATE AXLGLW_VERSION_MINOR=${PROJECT_VERSION_MINOR}
-	PRIVATE AXLGLW_VERSION_PATCH=${PROJECT_VERSION_PATCH}
-)
-# Target properties
+if( "${LIBAXLGLW_TYPE}" MATCHES "^[Ss][Tt][Aa][Tt][Ii][Cc]$" )
+	set( LIBAXLGLW_SUFFIX s )
+	target_compile_definitions( axl.glw
+		PUBLIC LIBAXLGLW_STATIC
+	)
+	if( INSTALL_ARCHIVES )
+		install( TARGETS axl.glw
+			ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/${ARCHIVES_INSTALL_DIR}"
+		)
+	endif()
+elseif( "${LIBAXLGLW_TYPE}" MATCHES "^[Ss][Hh][Aa][Rr][Ee][Dd]$" )
+	target_compile_definitions( axl.glw
+		PUBLIC LIBAXLGLW_SHARED
+	)
+	if( INSTALL_ARCHIVES )
+		install( TARGETS axl.glw
+			ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/${ARCHIVES_INSTALL_DIR}"
+		)
+	endif()
+	if( INSTALL_BINARIES )
+		install( TARGETS axl.glw
+			RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/${BINARY_INSTALL_DIR}"
+		)
+	endif()
+else()
+	set( LIBAXLGLW_SUFFIX l )
+endif()
+
+if( "${CMAKE_BUILD_TYPE}" MATCHES "[Dd][Ee][Bb][Uu][Gg]" )
+	set( LIBAXLGLW_SUFFIX "${LIBAXLGLW_SUFFIX}d" )
+endif()
+
 set_target_properties( axl.glw PROPERTIES
-	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/tests"
-	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/tests"
-)
-set_target_properties( axl.glw PROPERTIES
-	ARCHIVE_OUTPUT_NAME axl.glw${LIB_SUFFIX}
-	RUNTIME_OUTPUT_NAME axl.glw${LIB_SUFFIX}
-	LIBRARY_OUTPUT_NAME axl.glw${LIB_SUFFIX}
+	OUTPUT_NAME "${LIBAXLGLW_OUTPUT_NAME}${LIBAXLGLW_SUFFIX}"
+	ARCHIVE_OUTPUT_NAME "${LIBAXLGLW_OUTPUT_NAME}${LIBAXLGLW_SUFFIX}"
+	LIBRARY_OUTPUT_NAME "${LIBAXLGLW_OUTPUT_NAME}${LIBAXLGLW_SUFFIX}"
+	RUNTIME_OUTPUT_NAME "${LIBAXLGLW_OUTPUT_NAME}${LIBAXLGLW_SUFFIX}"
+	LIBRARY_OUTPUT_DIRECTORY "${LIBAXLGLW_EXPORT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY "${LIBAXLGLW_EXPORT_DIR}"
 )

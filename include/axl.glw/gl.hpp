@@ -1,5 +1,6 @@
 #pragma once
 #include <stddef.h>
+#include <stdint.h>
 #include "lib.hpp"
 
 #if !defined(__WIN32__) && (defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__))
@@ -33,6 +34,7 @@ namespace glw {
 namespace gl {
 
 // GL_VERSION_1_1
+typedef void GLvoid;
 typedef unsigned int GLenum;
 typedef unsigned int GLbitfield;
 typedef unsigned int GLuint;
@@ -58,12 +60,12 @@ typedef unsigned __int64 GLuint64EXT;
 typedef signed long long GLint64EXT;
 typedef unsigned long long GLuint64EXT;
 #else
-#  if defined(__MINGW32__) || defined(__CYGWIN__)
+# if defined(__MINGW32__) || defined(__CYGWIN__)
 #include <inttypes.h>
-#  endif
+# endif
+#endif
 typedef int64_t GLint64EXT;
 typedef uint64_t GLuint64EXT;
-#endif
 typedef GLint64EXT  GLint64;
 typedef GLuint64EXT GLuint64;
 typedef struct __GLsync *GLsync;

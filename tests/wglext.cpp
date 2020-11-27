@@ -301,7 +301,7 @@ void testFunctions(bool verbose)
 		Assertv(wglQueryCurrentContextNV, verbose);
 	}
 	// WGL_NV_render_depth_texture
-	if(verbose) printf("WGL_NV_render_depth_texture: %hhd\n",WGL_NV_render_depth_texture);
+	if(verbose) printf ("WGL_NV_render_depth_texture: %hhd\n",WGL_NV_render_depth_texture);
 	// WGL_NV_render_texture_rectangle
 	if(verbose) printf("WGL_NV_render_texture_rectangle: %hhd\n",WGL_NV_render_texture_rectangle);
 	// WGL_NV_swap_group

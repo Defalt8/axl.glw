@@ -28,26 +28,26 @@ int main(int argc, char *argv[])
 	{
 		InitError error;
 		Assertv(!glGetString(GL_VERSION), verbose);
-		Assertv(GL_MAJOR_VERSION == -1, verbose);
-		Assertv(GL_MINOR_VERSION == -1, verbose);
-		Assertv(GL_NUM_EXTENSIONS == -1, verbose);
+		Assertv(MAJOR_GL_VERSION == -1, verbose);
+		Assertv(MINOR_GL_VERSION == -1, verbose);
+		Assertv(NUM_GL_EXTENSIONS == -1, verbose);
 		Assertv((error = axl::glw::init(false)) == IERR_NO_CONTEXT, verbose);
 		Assertv(!glGetString(GL_VERSION), verbose);
 		Assertv(!glGetString(GL_EXTENSIONS), verbose);
-		Assertv(GL_MAJOR_VERSION == -1, verbose);
-		Assertv(GL_MINOR_VERSION == -1, verbose);
-		Assertv(GL_NUM_EXTENSIONS == -1, verbose);
+		Assertv(MAJOR_GL_VERSION == -1, verbose);
+		Assertv(MINOR_GL_VERSION == -1, verbose);
+		Assertv(NUM_GL_EXTENSIONS == -1, verbose);
 		Assertv((error = axl::glw::init()) == IERR_NONE, verbose);
 		Assertv(glGetString(GL_VERSION), verbose);
 		Assertv(glGetString(GL_EXTENSIONS), verbose);
-		Assertv(GL_MAJOR_VERSION > 0, verbose);
-		Assertv(GL_MINOR_VERSION >= 0, verbose);
-		Assertv(GL_NUM_EXTENSIONS >= 0, verbose);
+		Assertv(MAJOR_GL_VERSION > 0, verbose);
+		Assertv(MINOR_GL_VERSION >= 0, verbose);
+		Assertv(NUM_GL_EXTENSIONS >= 0, verbose);
 		GLint num_ext = 0;
 		const char* ext = (const char*)glGetString(GL_EXTENSIONS);
-		if(GL_MAJOR_VERSION >= 3)
+		if(MAJOR_GL_VERSION >= 3)
 		{
-			glGetIntegerv(GL_GL_NUM_EXTENSIONS, &num_ext);
+			glGetIntegerv(GL_NUM_EXTENSIONS, &num_ext);
 		}
 		else
 		{
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-		Assertv(num_ext == GL_NUM_EXTENSIONS, verbose);
+		Assertv(num_ext == NUM_GL_EXTENSIONS, verbose);
 		if(verbose) printf("GL_1_2: %hhd\n", V_1_2);
 		if(V_1_2)
 		{
@@ -524,9 +524,9 @@ int main(int argc, char *argv[])
 		axl::glw::cleanup();
 		Assertv(!glGetString(GL_VERSION), verbose);
 		Assertv(!glGetString(GL_EXTENSIONS), verbose);
-		Assertv(GL_MAJOR_VERSION == -1, verbose);
-		Assertv(GL_MINOR_VERSION == -1, verbose);
-		Assertv(GL_NUM_EXTENSIONS == -1, verbose);
+		Assertv(MAJOR_GL_VERSION == -1, verbose);
+		Assertv(MINOR_GL_VERSION == -1, verbose);
+		Assertv(NUM_GL_EXTENSIONS == -1, verbose);
 	}
 	puts("----------------------------------------");
 	printf("# %d Failed!\n", Assert::_num_failed_tests);

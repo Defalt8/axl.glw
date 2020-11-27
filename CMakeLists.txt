@@ -1,70 +1,62 @@
-cmake_minimum_required( VERSION 3.17 )
+cmake_minimum_required( VERSION 3.10 )
 
-project( axl.glw VERSION 0.5.9 DESCRIPTION "A well organized C++ OpenGL wrangler library" )
+project( axl.glw VERSION 0.6.14 DESCRIPTION "A well organized C++ OpenGL wrangler library" )
 
 # Configure
-set( LIBRARY_TYPE STATIC CACHE STRING "Library type")
-set( INSTALL_INCLUDE_DIR include CACHE PATH "Include headers' relative install directory")
-set( INSTALL_LIBRARY_DIR lib CACHE PATH "Library archives' relative install directory")
-set( INSTALL_BINARY_DIR bin CACHE PATH "Binaries' relative install directory")
-set( INSTALL_TOOLS_DIR bin CACHE PATH "Tool binaries install directory")
-set( CMAKE_CXX_STANDARD 11 CACHE STRING "Compilation standard")
-set( CMAKE_CXX_STANDARD_REQUIRED true )
-set( INSTALL_HEADERS ON CACHE BOOL "Install headers" )
-set( INSTALL_LIBRARY ON CACHE BOOL "Install library" )
-set( INSTALL_TOOLS OFF CACHE BOOL "Install tools" )
-set( BUILD_TOOLS OFF CACHE BOOL "Build tools" )
-set( BUILD_TESTS OFF CACHE BOOL "Build tests" )
+set( LIBAXLGLW_SUFFIX "" )
+set( CMAKE_CXX_STANDARD 11 CACHE STRING "C++ compiler standard.")
+set( LIBAXLGLW_TYPE STATIC CACHE STRING "Library type." )
+set( HEADERS_INSTALL_DIR "include" CACHE PATH "Relative path for header files to install." )
+set( ARCHIVES_INSTALL_DIR "lib" CACHE PATH "Relative path for library archives to install." )
+set( BINARY_INSTALL_DIR "bin" CACHE PATH "Relative path for runtime binaries to install." )
+set( LIBAXLGLW_EXPORT_DIR "${PROJECT_BINARY_DIR}/tests" CACHE PATH "Binary directory relative path for runtime binaries to build to." )
+set( INSTALL_HEADERS ON CACHE BOOL "" )
+set( INSTALL_ARCHIVES ON CACHE BOOL "" )
+set( INSTALL_BINARIES ON CACHE BOOL "" )
+set( INSTALL_TOOLS OFF CACHE BOOL "" )
+set( BUILD_TESTS OFF CACHE BOOL "" )
+set( BUILD_TOOLS OFF CACHE BOOL "" )
+set( LIBAXLGLW_PRINT_CONFIGS OFF CACHE BOOL "" )
 
-# Configure library type
-set( LIB_SUFFIX "" )
-if( "${LIBRARY_TYPE}" STREQUAL "MODULE" )
-# ---
-elseif( "${LIBRARY_TYPE}" STREQUAL "SHARED" )
-	set( LIB_SUFFIX ${LIB_SUFFIX}r )
-else()
-	set( LIBRARY_TYPE STATIC )
-	set( LIB_SUFFIX ${LIB_SUFFIX}s )
+if( LIBAXLGLW_PRINT_CONFIGS )
+	message( NOTICE "CMAKE_CXX_STANDARD:= ${CMAKE_CXX_STANDARD}" )
+	message( NOTICE "LIBAXLGLW_TYPE:= ${LIBAXLGLW_TYPE}" )
+	message( NOTICE "CMAKE_BUILD_TYPE:= ${CMAKE_BUILD_TYPE}" )
+	message( NOTICE "HEADERS_INSTALL_DIR:= ${HEADERS_INSTALL_DIR}" )
+	message( NOTICE "ARCHIVES_INSTALL_DIR:= ${ARCHIVES_INSTALL_DIR}" )
+	message( NOTICE "BINARY_INSTALL_DIR:= ${BINARY_INSTALL_DIR}" )
+	message( NOTICE "CMAKE_INSTALL_PREFIX:= ${CMAKE_INSTALL_PREFIX}" )
+	message( NOTICE "LIBAXLGLW_EXPORT_DIR:= ${LIBAXLGLW_EXPORT_DIR}" )
+	message( NOTICE "INSTALL_HEADERS:= ${INSTALL_HEADERS}" )
+	message( NOTICE "INSTALL_ARCHIVES:= ${INSTALL_ARCHIVES}" )
+	message( NOTICE "INSTALL_BINARIES:= ${INSTALL_BINARIES}" )
+	message( NOTICE "INSTALL_TOOLS:= ${INSTALL_TOOLS}" )
+	message( NOTICE "BUILD_TESTS:= ${BUILD_TESTS}" )
+	message( NOTICE "BUILD_TOOLS:= ${BUILD_TOOLS}" )
 endif()
 
-# Configure build type
 if( "${CMAKE_BUILD_TYPE}" MATCHES "[Dd][Ee][Bb][Uu][Gg]" )
 	add_compile_definitions( DEBUG )
-	set( LIB_SUFFIX ${LIB_SUFFIX}d )
 elseif( "${CMAKE_BUILD_TYPE}" MATCHES "[Rr][Ee][Ll]" )
 	add_compile_definitions( NDEBUG )
 endif()
 
-# Print configurations
-message( "Project: ${PROJECT_NAME}" )
-message( "LIBRARY_TYPE= ${LIBRARY_TYPE}" )
-message( "CMAKE_BUILD_TYPE= ${CMAKE_BUILD_TYPE}" )
-message( "CMAKE_INSTALL_PREFIX= ${CMAKE_INSTALL_PREFIX}" )
-message( "INSTALL_INCLUDE_DIR= ${INSTALL_INCLUDE_DIR}" )
-message( "INSTALL_LIBRARY_DIR= ${INSTALL_LIBRARY_DIR}" )
-message( "INSTALL_BINARY_DIR= ${INSTALL_BINARY_DIR}" )
-message( "CMAKE_CXX_STANDARD= ${CMAKE_CXX_STANDARD}" )
-message( "INSTALL_HEADERS= ${INSTALL_HEADERS}" )
-message( "INSTALL_LIBRARY= ${INSTALL_LIBRARY}" )
-message( "INSTALL_TOOLS= ${INSTALL_TOOLS}" )
-message( "BUILD_TOOLS= ${BUILD_TOOLS}" )
-message( "BUILD_TESTS= ${BUILD_TESTS}" )
-message( "------------------------------------------" )
-
 include_directories( include )
-add_subdirectory( src )
-if( ${BUILD_TOOLS} )
-	add_subdirectory( tools )
+
+
+add_subdirectory( src "axl.glw" )
+if( BUILD_TOOLS )
+	add_subdirectory( tools "tools" )
 endif()
-if( ${BUILD_TESTS} )
-	add_subdirectory( tests )
+if( BUILD_TESTS )
+	add_subdirectory( tests "tests" )
 endif()
 
 # Install
 if( INSTALL_HEADERS )
 	install( FILES
 		"include/axl.glw/lib.hpp"
-		"include/axl.glw/platform.hpp"
+		"include/axl.glw/platform.h"
 		"include/axl.glw/Dummy.hpp"
 		"include/axl.glw/glw.hpp"
 		"include/axl.glw/gl.hpp"
@@ -74,15 +66,6 @@ if( INSTALL_HEADERS )
 		"include/axl.glw/gl3.hpp"
 		"include/axl.glw/gl4.hpp"
 		"include/axl.glw/wglext.hpp"
-		DESTINATION "${INSTALL_INCLUDE_DIR}/axl.glw"
-	)
-endif()
-if( INSTALL_LIBRARY )
-	install( TARGETS
-		axl.glw
-		ARCHIVE DESTINATION "${INSTALL_LIBRARY_DIR}"
-		LIBRARY DESTINATION "${INSTALL_BINARY_DIR}"
-		RUNTIME DESTINATION "${INSTALL_BINARY_DIR}"
-		CONFIGURATIONS "" Debug Release
+		DESTINATION "${HEADERS_INSTALL_DIR}/axl.glw"
 	)
 endif()
