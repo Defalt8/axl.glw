@@ -14,7 +14,7 @@ set( INSTALL_HEADERS ON CACHE BOOL "" )
 set( INSTALL_ARCHIVES ON CACHE BOOL "" )
 set( INSTALL_BINARIES ON CACHE BOOL "" )
 set( INSTALL_TOOLS OFF CACHE BOOL "" )
-set( BUILD_TESTS OFF CACHE BOOL "" )
+set( LIBAXLGLW_BUILD_TESTS OFF CACHE BOOL "" )
 set( LIBAXLGLW_BUILD_TOOLS OFF CACHE BOOL "" )
 set( LIBAXLGLW_PRINT_CONFIGS OFF CACHE BOOL "" )
 
@@ -45,10 +45,10 @@ include_directories( include )
 
 
 add_subdirectory( src "axl.glw" )
-if( BUILD_TOOLS )
+if( LIBAXLGLW_BUILD_TOOLS )
 	add_subdirectory( tools "tools" )
 endif()
-if( BUILD_TESTS )
+if( LIBAXLGLW_BUILD_TESTS )
 	add_subdirectory( tests "tests" )
 endif()
 

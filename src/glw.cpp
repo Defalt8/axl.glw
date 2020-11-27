@@ -1,6 +1,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <axl.glw/platform.h>
+
+#if PLATFORM==PLATFORM_WINDOWS || PLATFORM==PLATFORM_LINUX
+#if PLATFORM==PLATFORM_WINDOWS
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
 #include <axl.glw/glw.hpp>
 #include <axl.glw/gl.hpp>
 #include <axl.glw/glext.hpp>
@@ -9,16 +14,19 @@
 #include <axl.glw/gl3.hpp>
 #include <axl.glw/gl4.hpp>
 #include <axl.glw/Dummy.hpp>
-
-#if PLATFORM==PLATFORM_WINDOWS || PLATFORM==PLATFORM_LINUX
-#if PLATFORM==PLATFORM_WINDOWS
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
 HGLRC GetCurrentContext()
 {
 	return wglGetCurrentContext();
 }
 #elif PLATFORM==PLATFORM_LINUX
+#include <axl.glw/glw.hpp>
+#include <axl.glw/gl.hpp>
+#include <axl.glw/glext.hpp>
+#include <axl.glw/gl1.hpp>
+#include <axl.glw/gl2.hpp>
+#include <axl.glw/gl3.hpp>
+#include <axl.glw/gl4.hpp>
+#include <axl.glw/Dummy.hpp>
 #define __gl_h_
 using namespace axl::glw::gl;
 #include <GL/glx.h>
