@@ -1,9 +1,6 @@
 #include <cstdlib>
 #include <cstring>
-#if PLATFORM==PLATFORM_WINDOWS
-#include "platform/win32/glProc.inl"
-#endif
-#include <axl.glw/platform.hpp>
+#include <axl.glw/platform.h>
 #include <axl.glw/glw.hpp>
 #include <axl.glw/gl.hpp>
 #include <axl.glw/glext.hpp>
@@ -12,7 +9,25 @@
 #include <axl.glw/gl3.hpp>
 #include <axl.glw/gl4.hpp>
 #include <axl.glw/Dummy.hpp>
+
+#if PLATFORM==PLATFORM_WINDOWS || PLATFORM==PLATFORM_LINUX
 #if PLATFORM==PLATFORM_WINDOWS
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
+HGLRC GetCurrentContext()
+{
+	return wglGetCurrentContext();
+}
+#elif PLATFORM==PLATFORM_LINUX
+#define __gl_h_
+using namespace axl::glw::gl;
+#include <GL/glx.h>
+GLXContext GetCurrentContext()
+{
+	return glXGetCurrentContext();
+}
+#endif
+#include "glProc.hpp"
 
 namespace axl {
 namespace glw {
@@ -420,9 +435,9 @@ bool GL_ARB_tessellation_shader = false;
 
 } // namespace axl.glw.glext
 
-int GL_MAJOR_VERSION = -1;
-int GL_MINOR_VERSION = -1;
-int GL_NUM_EXTENSIONS = -1;
+int MAJOR_GL_VERSION = -1;
+int MINOR_GL_VERSION = -1;
+int NUM_GL_EXTENSIONS = -1;
 
 InitError init(bool use_dummy)
 {
@@ -433,18 +448,18 @@ InitError init(bool use_dummy)
 	using namespace gl3;
 	using namespace gl4;
 	if(use_dummy && (Dummy::IERR_NONE != GlobalDummy.init() || false == GlobalDummy.makeCurrent())) return IERR_DUMMY;
-	if(!wglGetCurrentContext()) return IERR_NO_CONTEXT;
+	if(!GetCurrentContext()) return IERR_NO_CONTEXT;
 	const char* gl_version = (const char*)glGetString(GL_VERSION);
 	int major = (int)std::atof(gl_version);
 	int minor = (int)std::atof(gl_version[1] == '.' ? &gl_version[2] : gl_version[2] == '.' ? &gl_version[3] : &gl_version[4]);
-	GL_MAJOR_VERSION = major;
-	GL_MINOR_VERSION = minor;
-	if(GL_NUM_EXTENSIONS < 0) 
+	MAJOR_GL_VERSION = major;
+	MINOR_GL_VERSION = minor;
+	if(NUM_GL_EXTENSIONS < 0) 
 	{
 		GLint num_ext = 0;
-		if(GL_MAJOR_VERSION >= 3)
+		if(MAJOR_GL_VERSION >= 3)
 		{
-			glGetIntegerv(GL_GL_NUM_EXTENSIONS, &num_ext);
+			glGetIntegerv(NUM_GL_EXTENSIONS, &num_ext);
 		}
 		else
 		{
@@ -471,7 +486,7 @@ InitError init(bool use_dummy)
 				}
 			}
 		}
-		GL_NUM_EXTENSIONS = num_ext;
+		NUM_GL_EXTENSIONS = num_ext;
 	}
 	// GL_VERSION_1_2
 	if(major > 1 || (major == 1 && minor >= 2))
@@ -969,9 +984,9 @@ InitError init(bool use_dummy)
 void cleanup()
 {
 	GlobalDummy.destroy();
-	glw::GL_MAJOR_VERSION = -1;
-	glw::GL_MINOR_VERSION = -1;
-	glw::GL_NUM_EXTENSIONS = -1;
+	glw::MAJOR_GL_VERSION = -1;
+	glw::MINOR_GL_VERSION = -1;
+	glw::NUM_GL_EXTENSIONS = -1;
 }
 
 bool checkExtension(const char* extension, bool use_dummy)
@@ -984,17 +999,17 @@ bool checkExtension(const char* extension, bool use_dummy)
 	if(use_dummy) 
 	{
 		if(Dummy::IERR_NONE != GlobalDummy.init() || false == GlobalDummy.makeCurrent()) return false;
-		if(!wglGetCurrentContext()) return false;
+		if(!GetCurrentContext()) return false;
 	}
-	if(glw::GL_MAJOR_VERSION >= 3)
+	if(glw::MAJOR_GL_VERSION >= 3)
 	{
-		if(glw::GL_NUM_EXTENSIONS <= 0) 
+		if(glw::NUM_GL_EXTENSIONS <= 0) 
 		{
 			GLint num_ext;
-			glGetIntegerv(GL_GL_NUM_EXTENSIONS, &num_ext);
-			glw::GL_NUM_EXTENSIONS = num_ext;
+			glGetIntegerv(GL_NUM_EXTENSIONS, &num_ext);
+			glw::NUM_GL_EXTENSIONS = num_ext;
 		}
-		for(int i=0; i<glw::GL_NUM_EXTENSIONS; ++i)
+		for(int i=0; i<glw::NUM_GL_EXTENSIONS; ++i)
 		{
 			const char* ext= (const char*)glGetStringi(GL_EXTENSIONS, i);
 			if(0 == strcmp(extension, ext)) return GL_TRUE;

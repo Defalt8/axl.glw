@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
-#include <axl.glw/platform.hpp>
+#include <axl.glw/platform.h>
 #include "lib.hpp"
 
 int main()
