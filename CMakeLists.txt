@@ -77,7 +77,12 @@ if( INSTALL_HEADERS AND LIBAXLGLW_INSTALL_HEADERS )
 		"include/axl.glw/gl2.hpp"
 		"include/axl.glw/gl3.hpp"
 		"include/axl.glw/gl4.hpp"
-		"include/axl.glw/wglext.hpp"
 		DESTINATION "${HEADERS_INSTALL_DIR}/axl.glw"
 	)
+	if( WIN32 )
+		install( FILES
+			"include/axl.glw/wglext.hpp"
+			DESTINATION "${HEADERS_INSTALL_DIR}/axl.glw"
+		)
+	endif()
 endif()
