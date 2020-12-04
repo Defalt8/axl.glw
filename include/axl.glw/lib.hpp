@@ -18,6 +18,16 @@
 #	define AXLGLWCXXAPI
 #endif
 
+#if __cplusplus >= 201103L
+#	if _MSC_VER && _MSC_VER < 1900 // less than MSVC++ 2015
+#		define AXLGLWCONSTMODIFIER const static
+#	else
+#		define AXLGLWCONSTMODIFIER AXLGLWCONSTMODIFIER
+#	endif
+#else
+#	define AXLGLWCONSTMODIFIER const static
+#endif
+
 namespace axl {
 namespace glw {
 namespace lib {

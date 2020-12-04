@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.10 )
 
-project( axl.glw VERSION 0.6.14 DESCRIPTION "A well organized C++ OpenGL wrangler library" )
+project( axl.glw VERSION 0.6.15 DESCRIPTION "A well organized C++ OpenGL wrangler library" )
 
 # Configure
 set( LIBAXLGLW_SUFFIX "" )

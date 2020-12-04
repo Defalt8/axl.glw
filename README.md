@@ -4,7 +4,7 @@ A well organized C++ OpenGL wrangler library
 
 ## Latest version and supported platforms
 
-- Latest *version*: 0.6.14 *Alpha*
+- Latest *version*: 0.6.15 *Alpha*
 - Currently Supported *platforms*: **Windows**
 
 ## Library Headers
