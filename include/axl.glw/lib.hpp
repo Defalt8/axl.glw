@@ -22,7 +22,7 @@
 #	if _MSC_VER && _MSC_VER < 1900 // less than MSVC++ 2015
 #		define AXLGLWCONSTMODIFIER const static
 #	else
-#		define AXLGLWCONSTMODIFIER AXLGLWCONSTMODIFIER
+#		define AXLGLWCONSTMODIFIER constexpr
 #	endif
 #else
 #	define AXLGLWCONSTMODIFIER const static
