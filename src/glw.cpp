@@ -1002,7 +1002,7 @@ bool checkExtension(const char* extension, bool use_dummy)
 	using namespace gl;
 	using namespace gl3;
 	if(!extension) return false;
-	const int ext_len = std::strlen(extension);
+	const int ext_len = (int)std::strlen(extension);
 	if(ext_len <= 0) return false;
 	if(use_dummy) 
 	{
