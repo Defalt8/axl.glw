@@ -41,4 +41,22 @@ A well organized C++ OpenGL wrangler library
   - cd out\\build
   - cmake -B . -S ../../ (or with a generator of your choosing.) cmake -G \<generator\> -B . -S ../../
   - cmake --build .
+
+## CMake Options
+
+Default values are marked **bold**.
+
+- Library specific options
+  - LIBAXLGLW_TYPE=[**STATIC**|SHARED]
+  - LIBAXLGLW_BUILD_TESTS=[**ON**|OFF]
+  - LIBAXLGLW_BUILD_TOOLS=[**ON**|OFF]
+  - LIBAXLGLW_INSTALL_HEADERS=[**ON**|OFF]
+  - LIBAXLGLW_INSTALL_ARCHIVES=[**ON**|OFF]
+  - LIBAXLGLW_INSTALL_BINARIES=[**ON**|OFF]
+- General options
+  - BUILD_TESTS=[ON|**OFF**]
+  - BUILD_TOOLS=[ON|**OFF**]
+  - INSTALL_HEADERS=[**ON**|OFF]
+  - INSTALL_ARCHIVES=[**ON**|OFF]
+  - INSTALL_BINARIES=[**ON**|OFF]
   
