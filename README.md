@@ -25,3 +25,20 @@ A well organized C++ OpenGL wrangler library
 
 - *gl* -- An OpenGL info commandline tool.
 - *wgl* -- A windows OpenGL extension (WGL) info commandline tool.
+
+## Requirements
+
+- Windows operating system. (Linux and other platforms implementations are on the way)
+- CMake 3.10 or above.
+- Any C and C++ SDK that can be accessed through a command line. (MSVC, MinGW) If you have Visual Studio or CodeBlocks then you are set.
+
+## How to get started
+
+- Clone this repo into a directory and execute these commands to build the library.
+  - git clone https://github.com/defalt8/axl.glw.git
+  - cd template.axl.glw
+  - mkdir out\\build
+  - cd out\\build
+  - cmake -B . -S ../../ (or with a generator of your choosing.) cmake -G \<generator\> -B . -S ../../
+  - cmake --build .
+  
